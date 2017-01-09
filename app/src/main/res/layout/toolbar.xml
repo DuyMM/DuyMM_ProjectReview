@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_heiht"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:fitsSystemWindows="true"
+    android:minHeight="?attr/actionBarSize"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    android:background="@color/colorWhite">
+    <RelativeLayout
+        android:id="@+id/frameLayoutHeader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_relative_height"
+        android:background="@color/colorWhite"
+        >
+        <ImageView
+            android:contentDescription="@null"
+            android:id="@+id/imgToolBarShowLeftMenu"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:contentDescription="@null"
+            android:layout_centerVertical="true"
+            android:src="@drawable/logo"
+            android:id="@+id/imgHeader"
+            android:layout_marginLeft="@dimen/tv_img_logo_margin_left"
+            android:layout_marginStart="@dimen/tv_img_logo_margin_left"
+            android:layout_width="@dimen/tv_img_logo_width"
+            android:layout_height="@dimen/tv_img_logo_height"
+            android:fontFamily="monospace" />
+
+        <ImageView
+            android:contentDescription="@null"
+            android:src="@drawable/ic_info"
+            android:layout_width="@dimen/toolbar_info_width"
+            android:layout_height="@dimen/toolbar_info_height"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/toolbar_info_margin_right"
+            android:layout_marginEnd="@dimen/toolbar_info_margin_right"
+            android:id="@+id/imageView" />
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>

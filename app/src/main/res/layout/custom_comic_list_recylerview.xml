@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="@dimen/general_cardview_margin_top"
+    android:layout_marginLeft="@dimen/general_cardview_margin_left"
+    android:layout_marginStart="@dimen/general_cardview_margin_left"
+    android:layout_marginEnd="@dimen/general_cardview_margin_right"
+    android:layout_marginRight="@dimen/general_cardview_margin_right"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:contentDescription="@null"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvListComicTitle"
+        android:text="@string/title_comic_list"
+        android:textColor="@color/colorBlack"
+        android:fontFamily="monospace"
+        android:textStyle="normal|bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="@dimen/sub_title_text_size"
+        android:text="@string/sub_title_comic_list"
+        android:layout_below="@id/tvListComicTitle"
+        android:id="@+id/tvListComicSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewListComic"
+        android:layout_below="@id/tvListComicSubTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
+</android.support.v7.widget.CardView>

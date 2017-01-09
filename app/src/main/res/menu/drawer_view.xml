@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_first_fragment"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_second_fragment"
+            android:icon="@drawable/ic_favorite"
+            android:title="Favorite Book" />
+        <item
+            android:id="@+id/nav_third_fragment"
+            android:icon="@drawable/ic_sd_storage"
+            android:title="Book in sd card" />
+        <item android:id="@+id/bav_fourth_fragment"
+            android:icon="@drawable/ic_settings"
+            android:title="Setting"/>
+    </group>
+    <item android:title="Other">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/action_favorite"
+                    android:icon="@drawable/ic_info"
+                    android:title="About" />
+                <item
+                    android:icon="@drawable/ic_info"
+                    android:title="Rate my app" />
+            </group>
+        </menu>
+    </item>
+</menu>

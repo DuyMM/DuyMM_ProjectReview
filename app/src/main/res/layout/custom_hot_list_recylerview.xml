@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="@dimen/general_cardview_margin_left"
+    android:layout_marginStart="@dimen/general_cardview_margin_left"
+    android:layout_marginRight="@dimen/general_cardview_margin_right"
+    android:layout_marginEnd="@dimen/general_cardview_margin_right"
+    android:layout_marginTop="@dimen/general_cardview_margin_top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvListHotTitle"
+            android:text="@string/title_hot_list"
+            android:textColor="@color/colorMain"
+            android:fontFamily="monospace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal|bold" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@id/tvListHotTitle"
+            android:orientation="vertical"
+            android:id="@+id/recyclerViewListHot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

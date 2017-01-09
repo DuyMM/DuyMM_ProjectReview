@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_read_book"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.maimanhduy.rbook.activities.ReadBookActivity">
+
+    <ScrollView
+        android:id="@+id/scrollViewReadBook"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorDarkWhite">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvReadBook"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lineSpacingExtra="0dp"
+                android:textSize="15dp" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <fragment
+        android:id="@+id/fragmentSetting"
+        android:name="com.example.maimanhduy.rbook.fragments.SettingFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorWhite">
+
+        <ProgressBar
+            android:id="@+id/progressBarReadBook"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:tint="@color/colorMain"
+            android:id="@+id/imgShowSettingFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_settings_fragment" />
+      <TextView
+          android:textSize="18sp"
+          android:text="Sowld Art Online 3"
+          android:textAlignment="center"
+          android:layout_marginRight="50dp"
+          android:layout_marginEnd="50dp"
+          android:layout_alignParentBottom="true"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:textStyle="normal|bold" />
+        <ImageView
+            android:tint="@color/colorMain"
+            android:id="@+id/imgBackFormReadBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arrow_back_fragment" />
+    </RelativeLayout>
+
+</RelativeLayout>

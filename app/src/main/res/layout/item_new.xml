@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_new"
+    >
+    <TextView
+        android:text="@string/new_item_txt"
+        android:paddingEnd="@dimen/item_new_pading"
+        android:paddingLeft="@dimen/item_new_pading"
+        android:paddingRight="@dimen/item_new_pading"
+        android:paddingStart="@dimen/item_new_pading"
+        android:fontFamily="monospace"
+        android:id="@+id/tvHeaderBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/item_new_text_size" />
+</RelativeLayout>
+</merge>

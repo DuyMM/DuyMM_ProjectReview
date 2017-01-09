@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_marginRight="@dimen/new_item_margin_right"
+    android:layout_marginEnd="@dimen/new_item_margin_right"
+    android:layout_height="wrap_content">
+<ImageView
+    android:contentDescription="@null"
+    android:id="@+id/imgListInfoMoreItem"
+    android:src="@drawable/info_img"
+    android:scaleType="centerCrop"
+    android:layout_width="150dp"
+    android:layout_height="180dp" />
+    <TextView
+        android:id="@+id/tvListInfoMoreItem"
+        android:textColor="@color/colorBlack"
+        android:fontFamily="monospace"
+        android:text="@string/author_item_light_novel_default"
+        android:textSize="@dimen/new_item_title_text_size"
+        android:textStyle="normal|bold"
+        android:layout_below="@id/imgListInfoMoreItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

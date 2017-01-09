@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="itemNew">
+        <attr name="titleText" format="string" localization="suggested" />
+        <attr name="valueColor" format="color" />
+        <attr name="textSize" format="integer"/>/>
+    </declare-styleable>
+    <declare-styleable name="cricleButton">
+        <attr name="titleCricleButton" format="string" localization="suggested" />
+        <attr name="valueColorCricleButton" format="color" />
+        <attr name="textSizeCricleButton" format="integer"/>
+        <attr name="textColorCricleButton" format="color"/>/>
+    </declare-styleable>
+</resources>

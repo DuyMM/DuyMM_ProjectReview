@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">rBOOK</string>
+    <string name="new_item_txt">NEW</string>
+    <string name="title_light_novel_list">LIGHT NOVEL</string>
+    <string name="sub_title_light_novel_list">Tieu thuyet nhat ban</string>
+    <string name="title_comic_list">COMIC</string>
+    <string name="sub_title_comic_list">Truyen tranh noi chung</string>
+    <string name="hot_item_title_defaul">Harypoter va hon da phu thuy</string>
+    <string name="title_hot_list">BEST 5</string>
+    <string name="title_item_light_novel_defaul">Slowd art online 2</string>
+    <string name="author_item_light_novel_default">AnChung Agahi</string>
+    <string name="title_new_list">TOP NEW</string>
+    <string name="title_other_list">OTHER GENRES</string>
+    <string name="sub_title_other_list">The loai khac</string>
+    <string name="nav_header_text_default">rBook</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorie_menuleft_btn_title">Light Novel</string>
+    <string name="favorie_menuleft_btn_title_lightnovel">Light Novel</string>
+    <string name="favorie_menuleft_btn_title_comic">Comic</string>
+</resources>

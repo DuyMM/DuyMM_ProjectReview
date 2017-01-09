@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginRight="@dimen/new_item_margin_right"
+    android:layout_marginEnd="@dimen/new_item_margin_right"
+    android:layout_width="@dimen/new_item_width"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgListNewItem"
+        android:layout_width="@dimen/img_new_item_width"
+        android:layout_height="@dimen/img_new_item_height"
+        android:contentDescription="@null"
+        android:src="@drawable/hot1" />
+
+    <TextView
+        android:id="@+id/tvListNewItemTitle"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="@string/author_item_light_novel_default"
+        android:textSize="@dimen/new_item_title_text_size"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/imgListNewItem" />
+
+    <TextView
+        android:id="@+id/tvListNewItemAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvListNewItemTitle"
+        android:fontFamily="monospace"
+        android:text="@string/app_name"
+        android:textSize="@dimen/sub_title_text_size"
+        android:textStyle="normal" />
+</RelativeLayout>

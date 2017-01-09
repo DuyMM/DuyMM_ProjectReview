@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="@dimen/slide_show_height">
+<android.support.v4.view.ViewPager
+    android:background="@color/colorDarkWhite"
+    android:id="@+id/viewPagerSlideMain"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/view_pager_slide_show_height"/>
+    <com.hado.indicatorlibrary.IndicatorView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/indicator"
+        app:hado_radius_selected="@dimen/indicator_selected_radius"
+        app:hado_radius_unselected="@dimen/indicator_unselected_radius"
+        android:layout_marginTop="@dimen/indicator_margin_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

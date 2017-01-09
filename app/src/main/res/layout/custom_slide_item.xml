@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+<ImageView
+    android:src="@drawable/image1"
+    android:contentDescription="@null"
+    android:id="@+id/imgSlideItem"
+    android:scaleType="centerCrop"
+    android:adjustViewBounds="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+    <com.example.maimanhduy.rbook.ui.ItemNew
+        custom:titleText="New"
+        custom:valueColor="@color/colorLightBlue"
+        custom:textSize="15"
+        android:layout_margin="@dimen/item_new_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+   <RelativeLayout
+       android:background="@drawable/gradient"
+       android:layout_alignParentBottom="true"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/gradien_slider_show_height">
+       <TextView
+           android:id="@+id/tvSlideTitle"
+           android:fontFamily="monospace"
+           android:layout_marginBottom="@dimen/title_slide_show_margin_bot"
+           android:layout_marginLeft="@dimen/title_slide_show_margin_left"
+           android:layout_marginStart="@dimen/title_slide_show_margin_left"
+           android:layout_alignParentBottom="true"
+           android:textColor="@color/colorWhite"
+           android:text="@string/title_item_light_novel_defaul"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="@dimen/title_slide_show"
+           android:textStyle="normal|bold" />
+       <TextView
+           android:textSize="@dimen/sub_title_text_size"
+           android:fontFamily="monospace"
+           android:layout_alignParentBottom="true"
+           android:layout_marginLeft="@dimen/title_slide_show_margin_left"
+           android:layout_marginBottom="@dimen/author_slide_show_margin_bot"
+           android:background="@color/colorGrey"
+           android:text="@string/author_item_light_novel_default"
+           android:textColor="@color/colorWhite"
+           android:id="@+id/tvSlideAuthor"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
+   </RelativeLayout>
+</RelativeLayout>
