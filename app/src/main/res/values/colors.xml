@@ -9,4 +9,5 @@
     <color name="colorLightBlue">#00a6f8</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#585858</color>
+    <color name="translaterBlack">#80000000</color>
 </resources>

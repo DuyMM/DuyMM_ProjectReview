@@ -12,13 +12,22 @@
     android:layout_width="150dp"
     android:layout_height="180dp" />
     <TextView
-        android:id="@+id/tvListInfoMoreItem"
         android:textColor="@color/colorBlack"
+        android:id="@+id/tvListInfoMoreItemTitle"
+        android:fontFamily="monospace"
+        android:text="@string/author_item_light_novel_default"
+        android:textSize="@dimen/tv_list_info_item_text_size"
+        android:textStyle="normal|bold"
+        android:layout_below="@id/imgListInfoMoreItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvListInfoMoreItemAuthor"
         android:fontFamily="monospace"
         android:text="@string/author_item_light_novel_default"
         android:textSize="@dimen/new_item_title_text_size"
         android:textStyle="normal|bold"
-        android:layout_below="@id/imgListInfoMoreItem"
+        android:layout_below="@id/tvListInfoMoreItemTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </RelativeLayout>
