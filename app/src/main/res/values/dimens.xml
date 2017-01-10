@@ -84,7 +84,7 @@
     <dimen name="img_book_on_sdcard_height">150dp</dimen>
     <dimen name="tv_title_favorite_recyler_view_text_size">16sp</dimen>
     <dimen name="img_favorite_title_recylerview_width">70dp</dimen>
-    <dimen name="custom_item_new_text_size">15</dimen>
+    <dimen name="custom_item_new_text_size">15sp</dimen>
     <dimen name="fragment_setting_pading">25dp</dimen>
     <dimen name="img_close_fragment_seting_margin_top">40dp</dimen>
     <dimen name="img_close_fragment_setting_width">50dp</dimen>

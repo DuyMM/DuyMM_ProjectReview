@@ -16,7 +16,7 @@
     <com.example.maimanhduy.rbook.ui.ItemNew
         custom:titleText="New"
         custom:valueColor="@color/colorLightBlue"
-        custom:textSize="@dimen/custom_item_new_text_size"
+        custom:textSize="15"
         android:layout_margin="@dimen/item_new_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
