@@ -3,18 +3,18 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_first_fragment"
+            android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
-            android:id="@+id/nav_second_fragment"
+            android:id="@+id/nav_favorite"
             android:icon="@drawable/ic_favorite"
             android:title="Favorite Book" />
         <item
-            android:id="@+id/nav_third_fragment"
+            android:id="@+id/nav_book_in_sd_card"
             android:icon="@drawable/ic_sd_storage"
             android:title="Book in sd card" />
-        <item android:id="@+id/bav_fourth_fragment"
+        <item android:id="@+id/nav_setting"
             android:icon="@drawable/ic_settings"
             android:title="Setting"/>
     </group>
@@ -22,7 +22,6 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/action_favorite"
                     android:icon="@drawable/ic_info"
                     android:title="About" />
                 <item

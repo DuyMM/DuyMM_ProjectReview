@@ -23,11 +23,12 @@
     <string name="info_book_btn_read_title">Read</string>
     <string name="tv_or_title">Or</string>
     <string name="info_book_btn_download_title">Download</string>
-    <string name="tv_info_more_book_title" >More</string>
+    <string name="tv_info_more_book_title">More</string>
     <string name="tvi_title_book_of_readbook_default">Sowld Art Online 3</string>
     <string name="tv_title_favorite_recyler_view_content_default">Ben kia dam may noi ta hen uoc</string>
     <string name="date_of_add_favorite">22/11/2012</string>
     <string name="tv_book_on_sdcard_title_content_default">Swold art online 3</string>
     <string name="tv_font_style_title">Font Styke</string>
     <string name="tv_font_style_a">A</string>
+    <string name="tvTitleSettingActiviry"><![CDATA[Laguage & Other]]></string>
 </resources>

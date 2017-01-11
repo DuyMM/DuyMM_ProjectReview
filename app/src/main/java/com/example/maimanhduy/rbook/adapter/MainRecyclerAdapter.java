@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.maimanhduy.rbook.R;
+import com.example.maimanhduy.rbook.model.BookInFireBase;
 import com.hado.indicatorlibrary.IndicatorView;
 import com.hado.indicatorlibrary.PagesLessException;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,9 +26,14 @@ import java.util.TimerTask;
 
 public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
-
-    public MainRecyclerAdapter(Context context){
-        this.mContext = context;
+    private ArrayList<BookInFireBase> arrLightNovel = new ArrayList<>();
+    private ArrayList<BookInFireBase> arrComic = new ArrayList<>();
+    private ArrayList<BookInFireBase> arrOther = new ArrayList<>();
+    public MainRecyclerAdapter(Context mContext,ArrayList<BookInFireBase> arrLightNovel, ArrayList<BookInFireBase> arrComic, ArrayList<BookInFireBase> arrOther){
+        this.mContext = mContext;
+        this.arrLightNovel = arrLightNovel;
+        this.arrComic = arrComic;
+        this.arrOther = arrOther;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -52,7 +59,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                } catch (PagesLessException e) {
                    e.printStackTrace();
                }
-               final Handler handler = new Handler();
+              final Handler handler = new Handler();
 
                final Runnable update = new Runnable() {
                    public void run() {
@@ -70,7 +77,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                    public void run() {
                        handler.post(update);
                    }
-               }, 5000, 5000); break;
+               }, 10000, 10000); break;
            case 1:
                LinearLayoutManager linearListNew = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL,false);
                ListNewMainViewHolder listNewViewHolder = (ListNewMainViewHolder) holder;
@@ -95,8 +102,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                ListLightNovelMainViewHoler listLightNovelMainViewHoler = (ListLightNovelMainViewHoler) holder;
                listLightNovelMainViewHoler.mRecylerViewListLightNovel.setHasFixedSize(true);
                listLightNovelMainViewHoler.mRecylerViewListLightNovel.setLayoutManager(linearListLightNovel);
-               ListLightNovelAdapter adapter2 = new ListLightNovelAdapter();
-               listLightNovelMainViewHoler.mRecylerViewListLightNovel.setAdapter(adapter2);
+               listLightNovelMainViewHoler.mRecylerViewListLightNovel.setAdapter(listLightNovelMainViewHoler.adapter2);
                listLightNovelMainViewHoler.mRecylerViewListLightNovel.setItemAnimator(new DefaultItemAnimator());
                break;
            case 4:
@@ -104,7 +110,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                ListComicMainViewHolder listComicMainViewHolder = (ListComicMainViewHolder)holder;
                listComicMainViewHolder.mRecylerViewListComic.setHasFixedSize(true);
                listComicMainViewHolder.mRecylerViewListComic.setLayoutManager(linearListComic);
-               ListLightNovelAdapter adapter3 = new ListLightNovelAdapter();
+               ListLightNovelAdapter adapter3 = new ListLightNovelAdapter(arrComic,mContext);
                listComicMainViewHolder.mRecylerViewListComic.setAdapter(adapter3);
                listComicMainViewHolder.mRecylerViewListComic.setItemAnimator(new DefaultItemAnimator());
                break;
@@ -113,7 +119,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                ListOtherGenresMainViewHodlder listOtherGenresMainViewHodlder = (ListOtherGenresMainViewHodlder)holder;
                listOtherGenresMainViewHodlder.mRecylerViewListOther.setHasFixedSize(true);
                listOtherGenresMainViewHodlder.mRecylerViewListOther.setLayoutManager(linearListOther);
-               ListLightNovelAdapter adapter4 = new ListLightNovelAdapter();
+               ListLightNovelAdapter adapter4 = new ListLightNovelAdapter(arrOther,mContext);
                listOtherGenresMainViewHodlder.mRecylerViewListOther.setAdapter(adapter4);
                listOtherGenresMainViewHodlder.mRecylerViewListOther.setItemAnimator(new DefaultItemAnimator());
                break;
@@ -160,9 +166,11 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
     private class ListLightNovelMainViewHoler extends RecyclerView.ViewHolder{
         RecyclerView mRecylerViewListLightNovel;
+        ListLightNovelAdapter adapter2;
          ListLightNovelMainViewHoler(View itemView) {
             super(itemView);
             mRecylerViewListLightNovel = (RecyclerView)itemView.findViewById(R.id.recyclerViewListLightNovel);
+             adapter2 =new ListLightNovelAdapter(arrLightNovel,mContext);
         }
     }
     private class ListComicMainViewHolder extends RecyclerView.ViewHolder{
@@ -172,9 +180,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mRecylerViewListComic = (RecyclerView)itemView.findViewById(R.id.recyclerViewListComic);
         }
     }
-    class ListOtherGenresMainViewHodlder extends RecyclerView.ViewHolder{
+    private class ListOtherGenresMainViewHodlder extends RecyclerView.ViewHolder{
         RecyclerView mRecylerViewListOther;
-        public ListOtherGenresMainViewHodlder(View itemView) {
+        ListOtherGenresMainViewHodlder(View itemView) {
             super(itemView);
             mRecylerViewListOther = (RecyclerView)itemView.findViewById(R.id.recyclerViewListOther);
         }
