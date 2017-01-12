@@ -29,11 +29,15 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private ArrayList<BookInFireBase> arrLightNovel = new ArrayList<>();
     private ArrayList<BookInFireBase> arrComic = new ArrayList<>();
     private ArrayList<BookInFireBase> arrOther = new ArrayList<>();
-    public MainRecyclerAdapter(Context mContext,ArrayList<BookInFireBase> arrLightNovel, ArrayList<BookInFireBase> arrComic, ArrayList<BookInFireBase> arrOther){
+    private ArrayList<BookInFireBase> arrNew = new ArrayList<>();
+    private ArrayList<BookInFireBase> arrHot = new ArrayList<>();
+    public MainRecyclerAdapter(Context mContext,ArrayList<BookInFireBase> arrLightNovel, ArrayList<BookInFireBase> arrComic, ArrayList<BookInFireBase> arrOther, ArrayList<BookInFireBase> arrNew, ArrayList<BookInFireBase> arrHot){
         this.mContext = mContext;
         this.arrLightNovel = arrLightNovel;
         this.arrComic = arrComic;
         this.arrOther = arrOther;
+        this.arrNew = arrNew;
+        this.arrHot = arrHot;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -83,7 +87,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                ListNewMainViewHolder listNewViewHolder = (ListNewMainViewHolder) holder;
                listNewViewHolder.mRecylerViewListNew.setHasFixedSize(true);
                listNewViewHolder.mRecylerViewListNew.setLayoutManager(linearListNew);
-               ListNewAdapter adapter = new ListNewAdapter();
+               ListNewAdapter adapter = new ListNewAdapter(arrNew,mContext);
                listNewViewHolder.mRecylerViewListNew.setAdapter(adapter);
                listNewViewHolder.mRecylerViewListNew.setItemAnimator(new DefaultItemAnimator());
               // listHotViewHolder.mRecylerViewListHot.scrollToPosition(0);
@@ -93,7 +97,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                ListHotMainViewHolder listHotMainViewHolder = (ListHotMainViewHolder)holder;
                listHotMainViewHolder.mRecylerViewListHot.setHasFixedSize(true);
                listHotMainViewHolder.mRecylerViewListHot.setLayoutManager(linearListHot);
-               ListHotAdapter adapter1 = new ListHotAdapter();
+               ListHotAdapter adapter1 = new ListHotAdapter(arrHot,mContext);
                listHotMainViewHolder.mRecylerViewListHot.setAdapter(adapter1);
                listHotMainViewHolder.mRecylerViewListHot.setItemAnimator(new DefaultItemAnimator());
                break;

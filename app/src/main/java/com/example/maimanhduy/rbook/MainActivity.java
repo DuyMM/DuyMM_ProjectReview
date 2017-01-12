@@ -1,6 +1,7 @@
 package com.example.maimanhduy.rbook;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -20,7 +21,9 @@ import android.widget.ImageView;
 
 import com.example.maimanhduy.rbook.activities.BookInSdCardActivity;
 import com.example.maimanhduy.rbook.activities.FavoriteBookActivity;
+import com.example.maimanhduy.rbook.activities.InfoBookActivity;
 import com.example.maimanhduy.rbook.activities.SettingActivity;
+import com.example.maimanhduy.rbook.adapter.ListNewAdapter;
 import com.example.maimanhduy.rbook.adapter.MainRecyclerAdapter;
 import com.example.maimanhduy.rbook.model.BookInFireBase;
 import com.google.firebase.database.DataSnapshot;
@@ -31,18 +34,21 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements ListNewAdapter.callBackFormListNew {
     private RecyclerView mRecyclerViewMain;
     private MainRecyclerAdapter mMainRecylerAdapter;
     private DrawerLayout mDrawer;
     private Toolbar mMainToolbar;
     private NavigationView mNvViewLeftMenu;
-    protected   Toolbar mLocalMainTool;
+    protected Toolbar mLocalMainTool;
     private ImageView mImgButtonShowMenuLeft;
     private ArrayList<BookInFireBase> arrListLightNovel = new ArrayList<>();
     private ArrayList<BookInFireBase> arrListComic = new ArrayList<>();
     private ArrayList<BookInFireBase> arrListOther = new ArrayList<>();
+    private ArrayList<BookInFireBase> arrListHot = new ArrayList<>();
+    private ArrayList<BookInFireBase> arrListNew = new ArrayList<>();
     private DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,21 +58,22 @@ public class MainActivity extends AppCompatActivity  {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
         mRecyclerViewMain.setHasFixedSize(true);
         mRecyclerViewMain.setLayoutManager(linearLayoutManager);
-        mMainRecylerAdapter = new MainRecyclerAdapter(MainActivity.this, arrListLightNovel,arrListComic,arrListOther);
+        mMainRecylerAdapter = new MainRecyclerAdapter(MainActivity.this, arrListLightNovel, arrListComic, arrListOther, arrListNew, arrListHot);
         mRecyclerViewMain.setAdapter(mMainRecylerAdapter);
-        loadListLightNovel();
-        loadListComic();
-        loadListOther();
+        LoadDataAsyncTask async = new LoadDataAsyncTask();
+        async.execute();
     }
-    private void init(){
+
+    private void init() {
         mMainToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNvViewLeftMenu = (NavigationView) findViewById(R.id.nvView);
-        mLocalMainTool = (Toolbar)findViewById(R.id.mainToolBar);
-        mImgButtonShowMenuLeft = (ImageView)mLocalMainTool.findViewById(R.id.imgToolBarShowLeftMenu);
-        mRecyclerViewMain = (RecyclerView)findViewById(R.id.recycerViewMain);
+        mLocalMainTool = (Toolbar) findViewById(R.id.mainToolBar);
+        mImgButtonShowMenuLeft = (ImageView) mLocalMainTool.findViewById(R.id.imgToolBarShowLeftMenu);
+        mRecyclerViewMain = (RecyclerView) findViewById(R.id.recycerViewMain);
         databaseReference = FirebaseDatabase.getInstance().getReference();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up action should open or close the drawer.
@@ -78,6 +85,7 @@ public class MainActivity extends AppCompatActivity  {
 
         return super.onOptionsItemSelected(item);
     }
+
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -88,28 +96,29 @@ public class MainActivity extends AppCompatActivity  {
                     }
                 });
     }
+
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         Class fragmentClass;
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
             case R.id.nav_home:
-               // fragmentClass = FirstFragment.class;
+                // fragmentClass = FirstFragment.class;
                 startActivity(new Intent(MainActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 break;
             case R.id.nav_favorite:
-               // fragmentClass = SecondFragment.class;
+                // fragmentClass = SecondFragment.class;
                 startActivity(new Intent(MainActivity.this, FavoriteBookActivity.class));
                 break;
             case R.id.nav_book_in_sd_card:
-               // fragmentClass = ThirdFragment.class;
+                // fragmentClass = ThirdFragment.class;
                 startActivity(new Intent(MainActivity.this, BookInSdCardActivity.class));
                 break;
             case R.id.nav_setting:
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
                 break;
             default:
-               // fragmentClass = FirstFragment.class;
+                // fragmentClass = FirstFragment.class;
         }
 
         try {
@@ -119,8 +128,8 @@ public class MainActivity extends AppCompatActivity  {
         }
 
         // Insert the fragment by replacing any existing fragment
-       // FragmentManager fragmentManager = getSupportFragmentManager();
-       // fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        // FragmentManager fragmentManager = getSupportFragmentManager();
+        // fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
@@ -129,7 +138,8 @@ public class MainActivity extends AppCompatActivity  {
         // Close the navigation drawer
         mDrawer.closeDrawers();
     }
-    private void setupToolBar(){
+
+    private void setupToolBar() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -145,43 +155,29 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
-    public void loadListLightNovel(){
-    databaseReference.child("LightNovel").addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            arrListLightNovel.clear();
-            for (DataSnapshot snap: dataSnapshot.getChildren()){
-                String title = (String) snap.child("Title").getValue();
-                String author = (String) snap.child("Author").getValue();
-                String linkImage = (String) snap.child("LinkImage").getValue();
-                String linkBook = (String) snap.child("LinkBook").getValue();
-                String id = snap.getKey();
-                //Log.d("ThongTin",title+"-"+author+"-"+linkImage+"-"+linkBook+"-"+id);
-                arrListLightNovel.add(new BookInFireBase(title,author,linkImage,linkBook,id));
-            }
-          mMainRecylerAdapter.notifyItemChanged(3);
-        }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    });
-    }
-    public void loadListComic(){
-        databaseReference.child("Comic").addValueEventListener(new ValueEventListener() {
+    public void loadListHot() {
+        databaseReference.child("LightNovel").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                arrListComic.clear();
-                for (DataSnapshot snap: dataSnapshot.getChildren()){
+                arrListHot.clear();
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
                     String title = (String) snap.child("Title").getValue();
                     String author = (String) snap.child("Author").getValue();
                     String linkImage = (String) snap.child("LinkImage").getValue();
                     String linkBook = (String) snap.child("LinkBook").getValue();
                     String id = snap.getKey();
-                    arrListComic.add(new BookInFireBase(title,author,linkImage,linkBook,id));
+                    String views = snap.child("Views").getValue().toString();
+                    if (arrListHot.size() != 0) {
+                        for (int i = 0; i < arrListHot.size(); i++) {
+                            if (arrListHot.get(i).getId().equals(id)) {
+                                arrListHot.remove(i);
+                            }
+                        }
+                    }
+                    arrListHot.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
                 }
-                mMainRecylerAdapter.notifyItemChanged(4);
+                loadComic();
             }
 
             @Override
@@ -190,20 +186,28 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
-    public void loadListOther(){
+
+    public void loadOther() {
         databaseReference.child("Other").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                arrListOther.clear();
-                for (DataSnapshot snap: dataSnapshot.getChildren()){
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
                     String title = (String) snap.child("Title").getValue();
                     String author = (String) snap.child("Author").getValue();
                     String linkImage = (String) snap.child("LinkImage").getValue();
                     String linkBook = (String) snap.child("LinkBook").getValue();
                     String id = snap.getKey();
-                    arrListOther.add(new BookInFireBase(title,author,linkImage,linkBook,id));
+                    String views = snap.child("Views").getValue().toString();
+                    if (arrListHot.size() != 0) {
+                        for (int i = 0; i < arrListHot.size(); i++) {
+                            if (arrListHot.get(i).getId().equals(id)) {
+                                arrListHot.remove(i);
+                            }
+                        }
+                    }
+                    arrListHot.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
                 }
-                mMainRecylerAdapter.notifyItemChanged(5);
+                mMainRecylerAdapter.notifyItemChanged(2);
             }
 
             @Override
@@ -212,4 +216,197 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
+
+    public void loadComic() {
+        databaseReference.child("Comic").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    String title = (String) snap.child("Title").getValue();
+                    String author = (String) snap.child("Author").getValue();
+                    String linkImage = (String) snap.child("LinkImage").getValue();
+                    String linkBook = (String) snap.child("LinkBook").getValue();
+                    String id = snap.getKey();
+                    String views = snap.child("Views").getValue().toString();
+                    if (arrListHot.size() != 0) {
+                        for (int i = 0; i < arrListHot.size(); i++) {
+                            if (arrListHot.get(i).getId().equals(id)) {
+                                arrListHot.remove(i);
+                            }
+                        }
+                    }
+                    arrListHot.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
+                }
+                loadOther();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public void openInforBookListNew(String category,String position) {
+        Intent intent = new Intent(MainActivity.this, InfoBookActivity.class);
+        intent.putExtra("id",position);
+        intent.putExtra("category",category);
+        startActivity(intent);
+    }
+
+    public class LoadDataAsyncTask extends AsyncTask<Void, Integer, Void> {
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            databaseReference.child("LightNovel").limitToFirst(3).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    arrListNew.clear();
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        String title = (String) snap.child("Title").getValue();
+                        String author = (String) snap.child("Author").getValue();
+                        String linkImage = (String) snap.child("LinkImage").getValue();
+                        String linkBook = (String) snap.child("LinkBook").getValue();
+                        String views = snap.child("Views").getValue().toString();
+                        String id = snap.getKey();
+                        if (arrListNew.size() != 0) {
+                            for (int i = 0; i < arrListNew.size(); i++) {
+                                if (arrListNew.get(i).getId().equals(id)) {
+                                    arrListNew.remove(i);
+                                }
+                            }
+                        }
+                        arrListNew.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
+                    }
+                    databaseReference.child("Other").limitToFirst(3).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                                String title = (String) snap.child("Title").getValue();
+                                String author = (String) snap.child("Author").getValue();
+                                String linkImage = (String) snap.child("LinkImage").getValue();
+                                String linkBook = (String) snap.child("LinkBook").getValue();
+                                String views = snap.child("Views").getValue().toString();
+                                String id = snap.getKey();
+                                if (arrListNew.size() != 0) {
+                                    for (int i = 0; i < arrListNew.size(); i++) {
+                                        if (arrListNew.get(i).getId().equals(id)) {
+                                            arrListNew.remove(i);
+                                        }
+                                    }
+                                }
+                                arrListNew.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
+                                databaseReference.child("Comic").limitToFirst(3).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                                            String title = (String) snap.child("Title").getValue();
+                                            String author = (String) snap.child("Author").getValue();
+                                            String linkImage = (String) snap.child("LinkImage").getValue();
+                                            String linkBook = (String) snap.child("LinkBook").getValue();
+                                            String views = snap.child("Views").getValue().toString();
+                                            String id = snap.getKey();
+                                            if (arrListNew.size() != 0) {
+                                                for (int i = 0; i < arrListNew.size(); i++) {
+                                                    if (arrListNew.get(i).getId().equals(id)) {
+                                                        arrListNew.remove(i);
+                                                    }
+                                                }
+                                            }
+                                            arrListNew.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
+                                        }
+                                        mMainRecylerAdapter.notifyItemChanged(1);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            databaseReference.child("LightNovel").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    arrListLightNovel.clear();
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        String title = (String) snap.child("Title").getValue();
+                        String author = (String) snap.child("Author").getValue();
+                        String linkImage = (String) snap.child("LinkImage").getValue();
+                        String linkBook = (String) snap.child("LinkBook").getValue();
+                        String id = snap.getKey();
+                        String views = snap.child("Views").getValue().toString();
+                        //Log.d("ThongTin",title+"-"+author+"-"+linkImage+"-"+linkBook+"-"+id);
+                        arrListLightNovel.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
+                    }
+                    mMainRecylerAdapter.notifyItemChanged(3);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            databaseReference.child("Other").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    arrListOther.clear();
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        String title = (String) snap.child("Title").getValue();
+                        String author = (String) snap.child("Author").getValue();
+                        String linkImage = (String) snap.child("LinkImage").getValue();
+                        String linkBook = (String) snap.child("LinkBook").getValue();
+                        String id = snap.getKey();
+                        String views = snap.child("Views").getValue().toString();
+                        arrListOther.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
+                    }
+                    mMainRecylerAdapter.notifyItemChanged(5);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            databaseReference.child("Comic").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    arrListComic.clear();
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        String title = (String) snap.child("Title").getValue();
+                        String author = (String) snap.child("Author").getValue();
+                        String linkImage = (String) snap.child("LinkImage").getValue();
+                        String linkBook = (String) snap.child("LinkBook").getValue();
+                        String id = snap.getKey();
+                        String views = snap.child("Views").getValue().toString();
+                        arrListComic.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
+                    }
+                    mMainRecylerAdapter.notifyItemChanged(4);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            loadListHot();
+            return null;
+        }
+    }
+
 }

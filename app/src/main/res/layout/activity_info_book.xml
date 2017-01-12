@@ -107,6 +107,7 @@
         android:layout_height="@dimen/toolbar_heiht">
 
       <ImageView
+          android:id="@+id/imgBackInfo"
           android:layout_marginStart="10dp"
           android:layout_marginLeft="10dp"
           android:layout_centerVertical="true"

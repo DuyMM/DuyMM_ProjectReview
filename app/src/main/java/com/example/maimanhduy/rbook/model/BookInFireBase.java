@@ -5,21 +5,41 @@ package com.example.maimanhduy.rbook.model;
  */
 
 public class BookInFireBase {
-    public String TitleBook;
-    public String AuthorName;
-    public String LinkImage;
-    public String LinkBook;
-    public String Id;
+    private String TitleBook;
+    private String AuthorName;
+    private String LinkImage;
+    private String LinkBook;
+    private String Id;
+    private String Views;
+    private String BookCategory;
 
     public BookInFireBase() {
     }
 
-    public BookInFireBase(String titleBook, String authorName, String linkImage, String linkBook, String id) {
+    public BookInFireBase(String titleBook, String authorName, String linkImage, String linkBook, String id, String views, String bookCategory) {
         TitleBook = titleBook;
         AuthorName = authorName;
         LinkImage = linkImage;
         LinkBook = linkBook;
         Id = id;
+        Views = views;
+        BookCategory = bookCategory;
+    }
+
+    public String getBookCategory() {
+        return BookCategory;
+    }
+
+    public void setBookCategory(String bookCategory) {
+        BookCategory = bookCategory;
+    }
+
+    public String getViews() {
+        return Views;
+    }
+
+    public void setViews(String views) {
+        Views = views;
     }
 
     public String getTitleBook() {

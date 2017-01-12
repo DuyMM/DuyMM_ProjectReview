@@ -39,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/tvListhotItemAuthor"
         android:layout_below="@id/tvListHotItemTitle"
         android:textSize="@dimen/sub_title_text_size"
         android:fontFamily="monospace"
