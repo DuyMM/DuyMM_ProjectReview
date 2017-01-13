@@ -31,4 +31,14 @@
     <string name="tv_font_style_title">Font Styke</string>
     <string name="tv_font_style_a">A</string>
     <string name="tvTitleSettingActiviry"><![CDATA[Laguage & Other]]></string>
+    <string name="id">Id</string>
+    <string name="category">Category</string>
+    <string name="author">Author</string>
+    <string name="linkbook">LinkBook</string>
+    <string name="linkimage">LinkImage</string>
+    <string name="title">Title</string>
+    <string name="views">Views</string>
+    <string name="other">Other</string>
+    <string name="lightnovel">LightNovel</string>
+    <string name="comic">Comic</string>
 </resources>

@@ -16,6 +16,13 @@
         android:layout_marginTop="@dimen/img_close_fragment_seting_margin_top"
         android:layout_width="@dimen/img_close_fragment_setting_width"
         android:layout_height="@dimen/img_close_fragment_setting_height" />
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/imgFavoriteFragmentSetting"
+        android:src="@drawable/ic_favorite_border"
+        android:layout_marginTop="@dimen/img_close_fragment_seting_margin_top"
+        android:layout_width="@dimen/img_close_fragment_setting_width"
+        android:layout_height="@dimen/img_close_fragment_setting_height" />
     <RelativeLayout
         android:layout_below="@+id/imgCloseFragmentSetting"
         android:id="@+id/relativeSetting"

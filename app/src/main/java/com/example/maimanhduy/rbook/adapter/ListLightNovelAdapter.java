@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.maimanhduy.rbook.MainActivity;
 import com.example.maimanhduy.rbook.R;
 import com.example.maimanhduy.rbook.model.BookInFireBase;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -25,24 +26,32 @@ public class ListLightNovelAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private ArrayList<BookInFireBase> arrBookInFireBase = new ArrayList<>();
     private Context context;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageReference;
-    public ListLightNovelAdapter(ArrayList<BookInFireBase> arrBookInFireBase, Context context) {
+     private StorageReference storageReference;
+    private CallBackMainFormListLightNovel mListener;
+     ListLightNovelAdapter(ArrayList<BookInFireBase> arrBookInFireBase, Context context) {
         this.arrBookInFireBase = arrBookInFireBase;
         this.context = context;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        mListener = (MainActivity) parent.getContext();
         return new ListLightNovelViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_light_novel_list_item,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         storageReference = storage.getReference(arrBookInFireBase.get(position).getLinkImage());
         ListLightNovelViewHolder viewHolder= (ListLightNovelViewHolder)holder;
         viewHolder.tvListLightNovelItemTitle.setText(arrBookInFireBase.get(position).getTitleBook());
         viewHolder.tvListLightNovelItemAuthor.setText(arrBookInFireBase.get(position).getAuthorName());
         Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).centerCrop().placeholder(R.drawable.image1).crossFade().into(viewHolder.imgListLightNovel);
+        viewHolder.imgListLightNovel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.openInfoBookFormLightNovel(arrBookInFireBase.get(holder.getAdapterPosition()).getId(),arrBookInFireBase.get(holder.getAdapterPosition()).getBookCategory());
+            }
+        });
     }
 
     @Override
@@ -50,14 +59,17 @@ public class ListLightNovelAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return arrBookInFireBase.size();
     }
     private class ListLightNovelViewHolder extends RecyclerView.ViewHolder{
-        public ImageView imgListLightNovel;
-        public TextView tvListLightNovelItemTitle;
-        public TextView tvListLightNovelItemAuthor;
+         ImageView imgListLightNovel;
+         TextView tvListLightNovelItemTitle;
+         TextView tvListLightNovelItemAuthor;
         private ListLightNovelViewHolder(View itemView) {
             super(itemView);
             imgListLightNovel = (ImageView)itemView.findViewById(R.id.imgListLightNovelItem);
             tvListLightNovelItemTitle = (TextView)itemView.findViewById(R.id.tvListLightNovelItemTitle);
             tvListLightNovelItemAuthor = (TextView)itemView.findViewById(R.id.tvListLightNovelItemAuthor);
         }
+    }
+  public interface CallBackMainFormListLightNovel{
+        void openInfoBookFormLightNovel(String pos, String category);
     }
 }

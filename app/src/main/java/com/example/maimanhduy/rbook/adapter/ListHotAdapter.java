@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.maimanhduy.rbook.MainActivity;
 import com.example.maimanhduy.rbook.R;
 import com.example.maimanhduy.rbook.model.BookInFireBase;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -26,7 +27,7 @@ public class ListHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Context context;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference;
-
+    private callBackFormListHot mListener;
     public ListHotAdapter(ArrayList<BookInFireBase> arrListHot, Context context) {
         this.arrListHot = arrListHot;
         this.context = context;
@@ -34,17 +35,24 @@ public class ListHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        mListener = (MainActivity)parent.getContext();
         return new ListHotViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_hot_list_item,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder( final RecyclerView.ViewHolder holder, int position) {
         ListHotViewHolder viewHolder = (ListHotViewHolder)holder;
         storageReference = storage.getReference(arrListHot.get(position).getLinkImage());
            viewHolder.tvTopItem.setText(position+1+"");
         viewHolder.tvTitleItem.setText(arrListHot.get(position).getTitleBook());
         viewHolder.tvAuthorItem.setText(arrListHot.get(position).getAuthorName());
         Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).centerCrop().crossFade().into(viewHolder.imgHotItem);
+        viewHolder.imgHotItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.openInfoBookFormListHot(arrListHot.get(holder.getAdapterPosition()).getId(),arrListHot.get(holder.getAdapterPosition()).getBookCategory());
+            }
+        });
     }
 
     @Override
@@ -67,5 +75,8 @@ public class ListHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvTitleItem = (TextView)itemView.findViewById(R.id.tvListHotItemTitle);
             tvAuthorItem  = (TextView)itemView.findViewById(R.id.tvListhotItemAuthor);
         }
+    }
+    public interface callBackFormListHot{
+        void openInfoBookFormListHot(String pos, String category);
     }
 }

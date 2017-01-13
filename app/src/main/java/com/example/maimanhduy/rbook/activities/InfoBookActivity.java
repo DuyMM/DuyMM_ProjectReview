@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.maimanhduy.rbook.R;
@@ -67,7 +66,10 @@ public class InfoBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!mLinkBook.equals("")){
-                    Toast.makeText(InfoBookActivity.this, mLinkBook+"", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(InfoBookActivity.this, mLinkBook+"", Toast.LENGTH_SHORT).show();
+                    Intent openBook = new Intent(InfoBookActivity.this,ReadBookActivity.class);
+                    openBook.putExtra("linkBook",mLinkBook);
+                    startActivity(openBook);
                 }
             }
         });
@@ -76,11 +78,11 @@ public class InfoBookActivity extends AppCompatActivity {
         databaseReference.child(child).child(position).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mTvInfoTitle.setText(dataSnapshot.child("Title").getValue().toString());
-                mTvInfoDescription.setText(dataSnapshot.child("Author").getValue().toString());
-                stogareReference = storage.getReference(dataSnapshot.child("LinkImage").getValue().toString());
+                mTvInfoTitle.setText(dataSnapshot.child(getString(R.string.title)).getValue().toString());
+                mTvInfoDescription.setText(dataSnapshot.child(getString(R.string.author)).getValue().toString());
+                stogareReference = storage.getReference(dataSnapshot.child(getString(R.string.linkimage)).getValue().toString());
                 Glide.with(InfoBookActivity.this).using(new FirebaseImageLoader()).load(stogareReference).centerCrop().crossFade().into(mImgBook);
-                mLinkBook = dataSnapshot.child("LinkBook").getValue().toString();
+                mLinkBook = dataSnapshot.child(getString(R.string.linkbook)).getValue().toString();
             }
 
             @Override

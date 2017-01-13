@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.maimanhduy.rbook.R;
 import com.example.maimanhduy.rbook.adapter.FavoriteViewpagerAdapter;
@@ -19,6 +20,7 @@ public class FavoriteBookActivity extends AppCompatActivity implements View.OnCl
     private Button btnComic;
     private Button btnOther;
     private ViewPager mViewpagerFavorite;
+    private ImageView mImgBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,7 @@ public class FavoriteBookActivity extends AppCompatActivity implements View.OnCl
         btnComic = (Button) findViewById(R.id.btnFavoriteComic);
         btnOther = (Button) findViewById(R.id.btnFavoriteOther);
         mViewpagerFavorite = (ViewPager)findViewById(R.id.viewpagerFavorite);
+        mImgBack = (ImageView)findViewById(R.id.imgBackFormFavorate);
         FragmentManager manager = getSupportFragmentManager();
         PagerAdapter adapter = new FavoriteViewpagerAdapter(manager);
         mViewpagerFavorite.setAdapter(adapter);
@@ -51,6 +54,12 @@ public class FavoriteBookActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+        mImgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
