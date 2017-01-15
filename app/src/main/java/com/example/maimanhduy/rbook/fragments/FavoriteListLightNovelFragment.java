@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.maimanhduy.rbook.R;
 import com.example.maimanhduy.rbook.adapter.ListFavoriteAdapter;
+import com.example.maimanhduy.rbook.database.DatabaseHanderHelper;
+import com.example.maimanhduy.rbook.model.BookInFireBase;
+
+import java.util.ArrayList;
 
 ;
 
@@ -29,6 +33,11 @@ public class FavoriteListLightNovelFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerViewFavoriteLightNovel;
+    private ArrayList<BookInFireBase> arrListLightNovel = new ArrayList<>();
+    private ArrayList<BookInFireBase> arrListComic = new ArrayList<>();
+    private ArrayList<BookInFireBase> arrListOther = new ArrayList<>();
+    private ListFavoriteAdapter adapter;
+    private DatabaseHanderHelper db;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -70,12 +79,34 @@ public class FavoriteListLightNovelFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_list_light_novel, container, false);
+        db = new DatabaseHanderHelper(getActivity());
+        ArrayList<BookInFireBase> listGenerel = db.getAllBook();
+        for (int i=0;i<listGenerel.size();i++){
+            if (getString(R.string.lightnovel).equals(listGenerel.get(i).getBookCategory())){
+                arrListLightNovel.add(listGenerel.get(i));
+            }
+            if (getString(R.string.comic).equals(listGenerel.get(i).getBookCategory())){
+                arrListComic.add(listGenerel.get(i));
+            }
+            if (getString(R.string.other).equals(listGenerel.get(i).getBookCategory())){
+                arrListOther.add(listGenerel.get(i));
+            }
+        }
         recyclerViewFavoriteLightNovel = (RecyclerView)view.findViewById(R.id.recycerViewFavoriteLightNovel);
-        ListFavoriteAdapter adapter = new ListFavoriteAdapter();
+        if (mParam1.equals("0")){
+             adapter = new ListFavoriteAdapter(arrListLightNovel, getActivity());
+        }
+        if (mParam1.equals("1")){
+            adapter = new ListFavoriteAdapter(arrListComic, getActivity());
+        }
+        if (mParam1.equals("2")){
+            adapter = new ListFavoriteAdapter(arrListOther, getActivity());
+        }
         LinearLayoutManager lln = new LinearLayoutManager(getActivity());
         recyclerViewFavoriteLightNovel.setHasFixedSize(true);
         recyclerViewFavoriteLightNovel.setLayoutManager(lln);
         recyclerViewFavoriteLightNovel.setAdapter(adapter);
+       // Toast.makeText(getActivity(), mParam1, Toast.LENGTH_SHORT).show();
         return view;
     }
 

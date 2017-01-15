@@ -5,8 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-import com.example.maimanhduy.rbook.model.FavoriteBook;
+import com.example.maimanhduy.rbook.model.BookInFireBase;
 
 import java.util.ArrayList;
 
@@ -19,25 +20,27 @@ public class DatabaseHanderHelper extends SQLiteOpenHelper {
 
 
     // Phiên bản
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
 
     // Tên cơ sở dữ liệu.
-    private static final String DATABASE_NAME = "Book_Manager";
+    private static final String DATABASE_NAME = "Manager_Book";
 
 
     // Tên bảng: Note.
-    private static final String TABLE_FAVORITE = "Favorite";
-    private static final String COLUMN_FAVORITE_ID ="Note_Id";
-    private static final String COLUMN_FAVORITE_CATEGORY ="Note_Category";
-    private static final String COLUMN_FAVORITE_DATE = "Note_Date";
+    private static final String TABLE_FAVORITE = "Favorite_book";
+    private static final String COLUMN_FAVORITE_ID ="IdBook";
+    private static final String COLUMN_FAVORITE_TITLE ="Title";
+    private static final String COLUMN_FAVORITE_CATEGORY ="Category";
+    private static final String COLUMN_FAVORITE_LINK_BOOK = "LinkBook";
+    private static final String COLUMN_FAVORITE_LINK_IMAGE ="LinkImage";
     public DatabaseHanderHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String create_database = "CREATE TABLE "+ TABLE_FAVORITE+"("+COLUMN_FAVORITE_ID+"TEXT PRIMARY KEY, "+COLUMN_FAVORITE_CATEGORY+" TEXT, "+ COLUMN_FAVORITE_DATE +" TEXT)";
+        String create_database = "CREATE TABLE "+ TABLE_FAVORITE+"("+COLUMN_FAVORITE_ID+" PRIMARY KEY TEXT, "+COLUMN_FAVORITE_TITLE+" TEXT,"+COLUMN_FAVORITE_CATEGORY+" TEXT, "+COLUMN_FAVORITE_LINK_BOOK+" TEXT, "+COLUMN_FAVORITE_LINK_IMAGE+" TEXT"+");";
         sqLiteDatabase.execSQL(create_database);
     }
 
@@ -45,33 +48,39 @@ public class DatabaseHanderHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-    public void addNewFavoriteBook(FavoriteBook book){
+    public void addNewFavoriteBook(BookInFireBase book){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_FAVORITE_ID,book.getId());
-        values.put(COLUMN_FAVORITE_CATEGORY,book.getCategory());
-        values.put(COLUMN_FAVORITE_DATE,book.getDate());
+        values.put(COLUMN_FAVORITE_TITLE, book.getTitleBook());
+        values.put(COLUMN_FAVORITE_CATEGORY, book.getBookCategory());
+        values.put(COLUMN_FAVORITE_LINK_BOOK, book.getLinkBook());
+        values.put(COLUMN_FAVORITE_LINK_IMAGE, book.getLinkImage());
         db.insert(TABLE_FAVORITE,null,values);
         db.close();
+        Log.d(TAG,book.getId()+" "+book.getTitleBook()+" "+book.getBookCategory()+" "+book.getLinkBook()+" "+book.getLinkImage());
     }
     public void deleteFavoriteBook(String id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_FAVORITE,COLUMN_FAVORITE_ID+" = ?",new String[]{id});
         db.close();
     }
-    public ArrayList<FavoriteBook> getAllBook(){
-    ArrayList<FavoriteBook> arrFavorite = new ArrayList<>();
+    public ArrayList<BookInFireBase> getAllBook(){
+    ArrayList<BookInFireBase> arrFavorite = new ArrayList<>();
         String selectQuery = "SELECT * FROM "+ TABLE_FAVORITE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                FavoriteBook book = new FavoriteBook();
+                BookInFireBase book = new BookInFireBase();
                 book.setId(cursor.getString(0));
-                book.setCategory(cursor.getString(1));
-                book.setDate(cursor.getString(2));
-                // Thêm vào danh sách.
+                book.setTitleBook(cursor.getString(1));
+                book.setBookCategory(cursor.getString(2));
+                book.setLinkBook(cursor.getString(3));
+                book.setLinkImage(cursor.getString(4));
+               book.setAuthorName("");
+                book.setViews("");
                 arrFavorite.add(book);
             } while (cursor.moveToNext());
         }

@@ -1,5 +1,6 @@
 package com.example.maimanhduy.rbook.activities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -13,9 +14,10 @@ import android.widget.ImageView;
 
 import com.example.maimanhduy.rbook.R;
 import com.example.maimanhduy.rbook.adapter.FavoriteViewpagerAdapter;
+import com.example.maimanhduy.rbook.adapter.ListFavoriteAdapter;
 import com.example.maimanhduy.rbook.fragments.FavoriteListLightNovelFragment;
 
-public class FavoriteBookActivity extends AppCompatActivity implements View.OnClickListener,FavoriteListLightNovelFragment.OnFragmentInteractionListener {
+public class FavoriteBookActivity extends AppCompatActivity implements View.OnClickListener,FavoriteListLightNovelFragment.OnFragmentInteractionListener, ListFavoriteAdapter.OnCallBackFormListFavoriteAdapter {
     private Button btnLightNovel;
     private Button btnComic;
     private Button btnOther;
@@ -113,5 +115,13 @@ public class FavoriteBookActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void openBook(String position, String linkBook) {
+        Intent intent = new Intent(FavoriteBookActivity.this,ReadBookActivity.class);
+        intent.putExtra("id",position);
+        intent.putExtra("linkBook",linkBook);
+        startActivity(intent);
     }
 }

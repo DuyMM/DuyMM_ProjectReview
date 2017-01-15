@@ -37,6 +37,10 @@ public class InfoBookActivity extends AppCompatActivity {
     private Button mBtnReadBook;
     private ImageView mImgBack;
     private String mLinkBook;
+    private String mLinkImage;
+    private String mLinkTitle;
+    private String mId;
+    private String mCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +73,17 @@ public class InfoBookActivity extends AppCompatActivity {
                     //Toast.makeText(InfoBookActivity.this, mLinkBook+"", Toast.LENGTH_SHORT).show();
                     Intent openBook = new Intent(InfoBookActivity.this,ReadBookActivity.class);
                     openBook.putExtra("linkBook",mLinkBook);
+                    openBook.putExtra("linkImage",mLinkImage);
+                    openBook.putExtra("id", mId);
+                    openBook.putExtra("title",mLinkTitle);
+                    openBook.putExtra("category",mCategory);
                     startActivity(openBook);
                 }
             }
         });
     }
     public void loadBook(String child,String position){
+        mCategory = child;
         databaseReference.child(child).child(position).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -83,6 +92,9 @@ public class InfoBookActivity extends AppCompatActivity {
                 stogareReference = storage.getReference(dataSnapshot.child(getString(R.string.linkimage)).getValue().toString());
                 Glide.with(InfoBookActivity.this).using(new FirebaseImageLoader()).load(stogareReference).centerCrop().crossFade().into(mImgBook);
                 mLinkBook = dataSnapshot.child(getString(R.string.linkbook)).getValue().toString();
+                mLinkImage = dataSnapshot.child(getString(R.string.linkimage)).getValue().toString();
+                mLinkTitle = dataSnapshot.child(getString(R.string.title)).getValue().toString();
+                mId = dataSnapshot.getKey();
             }
 
             @Override

@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tvAuthorFavoriteRecylerview"
             android:layout_toRightOf="@id/imgFavoriteRecylerView"
             android:layout_toEndOf="@id/imgFavoriteRecylerView"
             android:layout_alignParentBottom="true"

@@ -38,6 +38,7 @@ public class SettingFragment extends Fragment {
     private TextView mTvFontSizePlus;
     private Button mBtnLightMode;
     private ImageButton mBtnNormalMode;
+    private ImageView mImgAddFavorite;
     private TextView mTvTextSize;
     private TextView mTvTextMargin;
     private static final String ARG_PARAM1 = "param1";
@@ -96,6 +97,7 @@ public class SettingFragment extends Fragment {
         mTvMarginPlus = (TextView) view.findViewById(R.id.tvMarginPlus);
         mBtnLightMode = (Button) view.findViewById(R.id.btnNightMode);
         mBtnNormalMode = (ImageButton) view.findViewById(R.id.btnNormalMode);
+        mImgAddFavorite = (ImageView)view.findViewById(R.id.imgFavoriteFragmentSetting);
         mTvTextSize = (TextView) view.findViewById(R.id.tvTextSize);
         mTvTextSize.setText("15.0");
         mTvTextMargin = (TextView)view.findViewById(R.id.tvMarginSize);
@@ -153,6 +155,12 @@ public class SettingFragment extends Fragment {
 
             }
         });
+        mImgAddFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               mListener.addFavoriteBook();
+            }
+        });
         return view;
     }
 
@@ -208,5 +216,6 @@ public class SettingFragment extends Fragment {
         void onNormalMode();
 
         void onChangeFont(int i);
+        void addFavoriteBook();
     }
 }

@@ -13,9 +13,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.maimanhduy.rbook.R;
+import com.example.maimanhduy.rbook.database.DatabaseHanderHelper;
 import com.example.maimanhduy.rbook.fragments.SettingFragment;
+import com.example.maimanhduy.rbook.model.BookInFireBase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -29,6 +32,7 @@ public class ReadBookActivity extends AppCompatActivity implements SettingFragme
     private ScrollView mScrollView;
     private int max;
     private Fragment fragment;
+    private DatabaseHanderHelper db;
     private float textSize = 15;
     private float lineSpacing = 0;
     private ImageView mImgShowSettingFragment;
@@ -43,19 +47,29 @@ public class ReadBookActivity extends AppCompatActivity implements SettingFragme
     private View mThisFragment;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageRef;
+    private String linkBook;
+    private String title;
+    private String linkImage;
+    private String id;
+    private String category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_book);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBarReadBook);
         mTvReadBook = (TextView) findViewById(R.id.tvReadBook);
+        db = new DatabaseHanderHelper(this);
         mScrollView = (ScrollView) findViewById(R.id.scrollViewReadBook);
         ft = getSupportFragmentManager().beginTransaction();
         fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentSetting);
         mThisFragment = findViewById(R.id.fragmentSetting);
         mThisFragment.setVisibility(View.INVISIBLE);
         Intent intent = getIntent();
-        String linkBook = intent.getStringExtra("linkBook");
+         linkBook = intent.getStringExtra("linkBook");
+        linkImage = intent.getStringExtra("linkImage");
+        id = intent.getStringExtra("id");
+        title = intent.getStringExtra("title");
+        category = intent.getStringExtra("category");
          storageRef = storage.getReference(linkBook);
         //mProgressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorMain), PorterDuff.Mode.SRC_IN);
         // mProgressBar.setProgressBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorMain)));
@@ -156,5 +170,11 @@ public class ReadBookActivity extends AppCompatActivity implements SettingFragme
     public void onChangeFont(int i) {
         mTypeFace = Typeface.createFromAsset(getAssets(), mFont[i]);
         mTvReadBook.setTypeface(mTypeFace);
+    }
+
+    @Override
+    public void addFavoriteBook() {
+        db.addNewFavoriteBook(new BookInFireBase(title,"",linkImage,linkBook,id,"0",category));
+        Toast.makeText(this, "Them Thanh Cong", Toast.LENGTH_SHORT).show();
     }
 }
