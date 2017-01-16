@@ -9,17 +9,25 @@ import android.widget.ImageView;
 
 import com.example.maimanhduy.rbook.R;
 import com.example.maimanhduy.rbook.adapter.ListBookOnCardAdapter;
+import com.example.maimanhduy.rbook.database.DatabaseHanderSDCard;
+import com.example.maimanhduy.rbook.model.BookOnSdCard;
+
+import java.util.ArrayList;
 
 public class BookInSdCardActivity extends AppCompatActivity {
 private RecyclerView mRecyclerViewBookInCard;
     private ImageView mImgBack;
+    private ArrayList<BookOnSdCard> arrBookOnSDcard = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_in_sd_card);
+        DatabaseHanderSDCard db = new DatabaseHanderSDCard(this);
+        ArrayList<BookOnSdCard> list = db.getAllBookOnSdCard();
+        arrBookOnSDcard.addAll(list);
         mRecyclerViewBookInCard = (RecyclerView)findViewById(R.id.recycerViewSDCard);
         mImgBack = (ImageView)findViewById(R.id.imgBackFormSDcard);
-        ListBookOnCardAdapter adapter = new ListBookOnCardAdapter();
+        ListBookOnCardAdapter adapter = new ListBookOnCardAdapter(arrBookOnSDcard, this);
         LinearLayoutManager lln = new LinearLayoutManager(this);
         mRecyclerViewBookInCard.setHasFixedSize(true);
         mRecyclerViewBookInCard.setLayoutManager(lln);

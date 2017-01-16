@@ -174,7 +174,7 @@ public class ReadBookActivity extends AppCompatActivity implements SettingFragme
 
     @Override
     public void addFavoriteBook() {
-        db.addNewFavoriteBook(new BookInFireBase(title,"",linkImage,linkBook,id,"0",category));
-        Toast.makeText(this, "Them Thanh Cong", Toast.LENGTH_SHORT).show();
+        db.addNewFavoriteBook(new BookInFireBase(title+"","",linkImage+"",linkBook+"",id+"","0",category+""));
+        Toast.makeText(this,"Success", Toast.LENGTH_SHORT).show();
     }
 }

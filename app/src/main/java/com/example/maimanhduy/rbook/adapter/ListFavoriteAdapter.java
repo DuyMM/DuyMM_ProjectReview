@@ -40,7 +40,7 @@ public class ListFavoriteAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         storageRef = storage.getReference(arrListFavorite.get(position).getLinkImage());
         ListFavoriteBookViewHolder viewHolder = (ListFavoriteBookViewHolder)holder;
         viewHolder.tvAuthor.setText(arrListFavorite.get(position).getAuthorName());
@@ -49,7 +49,7 @@ public class ListFavoriteAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.openBook(arrListFavorite.get(position).getId(),arrListFavorite.get(position).getLinkBook());
+                mListener.openBook(arrListFavorite.get(holder.getAdapterPosition()).getId(),arrListFavorite.get(holder.getAdapterPosition()).getLinkBook());
             }
         });
     }

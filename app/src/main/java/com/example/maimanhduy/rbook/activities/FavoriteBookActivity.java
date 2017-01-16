@@ -114,7 +114,6 @@ public class FavoriteBookActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-
     }
 
     @Override

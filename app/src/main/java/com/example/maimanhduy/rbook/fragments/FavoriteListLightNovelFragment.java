@@ -80,7 +80,7 @@ public class FavoriteListLightNovelFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_list_light_novel, container, false);
         db = new DatabaseHanderHelper(getActivity());
-        ArrayList<BookInFireBase> listGenerel = db.getAllBook();
+        ArrayList<BookInFireBase> listGenerel = db.getAllFavoriteBook();
         for (int i=0;i<listGenerel.size();i++){
             if (getString(R.string.lightnovel).equals(listGenerel.get(i).getBookCategory())){
                 arrListLightNovel.add(listGenerel.get(i));
