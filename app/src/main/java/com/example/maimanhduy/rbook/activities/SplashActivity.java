@@ -26,8 +26,9 @@ public class SplashActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            SystemClock.sleep(5000);
+            SystemClock.sleep(3000);
             onMainActivity();
+            finish();
             return null;
         }
     }

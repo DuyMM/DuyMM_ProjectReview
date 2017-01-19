@@ -45,7 +45,7 @@ public class ListFavoriteAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ListFavoriteBookViewHolder viewHolder = (ListFavoriteBookViewHolder)holder;
         viewHolder.tvAuthor.setText(arrListFavorite.get(position).getAuthorName());
         viewHolder.tvTitle.setText(arrListFavorite.get(position).getTitleBook());
-        Glide.with(context).using(new FirebaseImageLoader()).load(storageRef).centerCrop().crossFade().into(viewHolder.imgFavorite);
+        Glide.with(context).using(new FirebaseImageLoader()).load(storageRef).placeholder(R.drawable.ic_sync).centerCrop().crossFade().into(viewHolder.imgFavorite);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

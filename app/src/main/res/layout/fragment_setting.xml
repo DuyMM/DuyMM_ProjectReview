@@ -73,7 +73,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="54"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
 
@@ -82,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTextSize"
                 android:layout_centerHorizontal="true"
-                android:text="Font size" />
+                android:text="@string/tv_font_size" />
 
             <TextView
                 android:id="@+id/tvSettingFontSizePlus"
@@ -91,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="@string/tv_font_style_a"
                 android:textSize="@dimen/tvfont_style_a_big" />
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="-"
+                android:text="@string/minus"
                 android:textSize="50sp" />
 
             <TextView
@@ -125,7 +125,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="20"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
 
@@ -134,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvMarginSize"
                 android:layout_centerHorizontal="true"
-                android:text="Margin" />
+                android:text="@string/tv_margin_text" />
 
             <TextView
                 android:id="@+id/tvMarginPlus"
@@ -143,8 +142,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="+"
+                android:text="@string/plus"
                 android:textSize="50sp" />
         </RelativeLayout>
 
@@ -163,6 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/linearLightScreen">
         <ImageButton
+            android:contentDescription="@null"
             android:id="@+id/btnNormalMode"
             android:src="@drawable/ic_done"
             android:background="@drawable/cricle_button_nomal"
@@ -173,11 +174,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="Light Mode" />
+                android:text="@string/light_mode" />
             <Button
                 android:id="@+id/btnNightMode"
                 android:textColor="@color/colorDarkWhite"
-                android:text="Night"
+                android:text="@string/tv_night_mode"
                 android:background="@drawable/cricle_button_night"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"

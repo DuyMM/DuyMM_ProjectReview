@@ -38,7 +38,7 @@
                android:textColor="@color/colorGrey"
                android:layout_marginTop="@dimen/favorite_menu_left_btn_margin_top"
                android:layout_centerHorizontal="true"
-               android:text="other"
+               android:text="@string/other"
                android:layout_below="@id/btnFavoriteComic"
                android:id="@+id/btnFavoriteOther"
                android:background="@drawable/cricle_button_sepia"
@@ -47,6 +47,7 @@
        </RelativeLayout>
        <android.support.v4.view.ViewPager
            android:id="@+id/viewpagerFavorite"
+           android:layout_toEndOf="@+id/relativeFavoriteMenuLeft"
            android:layout_toRightOf="@id/relativeFavoriteMenuLeft"
            android:layout_width="match_parent"
            android:layout_height="match_parent"/>
@@ -70,7 +71,7 @@
         <TextView
             android:layout_toRightOf="@id/imgBackFormFavorate"
             android:layout_toEndOf="@+id/imgBackFormFavorate"
-            android:text="FAVORITE"
+            android:text="@string/favorite_title"
             android:textColor="@color/colorMain"
             android:textSize="18sp"
             android:layout_marginLeft="10dp"

@@ -45,7 +45,7 @@ public class ListNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
          storageReference = storage.getReference(arrListNew.get(position).getLinkImage());
         viewHolder.tvTitleHotItem.setText(arrListNew.get(position).getTitleBook());
         viewHolder.tvAuthorHotItem.setText(arrListNew.get(position).getAuthorName());
-        Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).centerCrop().crossFade().into(viewHolder.imgListHotItem);
+        Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).placeholder(R.drawable.ic_sync).centerCrop().crossFade().into(viewHolder.imgListHotItem);
         viewHolder.imgListHotItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

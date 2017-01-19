@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,6 +54,7 @@ public class InfoBookActivity extends AppCompatActivity {
     private String mLinkTitle;
     private String mId;
     private String mCategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,7 @@ public class InfoBookActivity extends AppCompatActivity {
             window.setStatusBarColor(getResources().getColor(R.color.colorMain));
         }
         init();
-        LinearLayoutManager lln = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager lln = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecylerViewMore.setHasFixedSize(true);
         mRecylerViewMore.setLayoutManager(lln);
         ListInfoMoreBookAdapter adapter = new ListInfoMoreBookAdapter();
@@ -71,7 +73,8 @@ public class InfoBookActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String category = intent.getStringExtra("category");
         String position = intent.getStringExtra("id");
-        loadBook(category,position);
+        checkBookHaveInSdCard(position);
+        loadBook(category, position);
         mImgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,14 +84,14 @@ public class InfoBookActivity extends AppCompatActivity {
         mBtnReadBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mLinkBook.equals("")){
+                if (!mLinkBook.equals("")) {
                     //Toast.makeText(InfoBookActivity.this, mLinkBook+"", Toast.LENGTH_SHORT).show();
-                    Intent openBook = new Intent(InfoBookActivity.this,ReadBookActivity.class);
-                    openBook.putExtra("linkBook",mLinkBook);
-                    openBook.putExtra("linkImage",mLinkImage);
+                    Intent openBook = new Intent(InfoBookActivity.this, ReadBookActivity.class);
+                    openBook.putExtra("linkBook", mLinkBook);
+                    openBook.putExtra("linkImage", mLinkImage);
                     openBook.putExtra("id", mId);
-                    openBook.putExtra("title",mLinkTitle);
-                    openBook.putExtra("category",mCategory);
+                    openBook.putExtra("title", mLinkTitle);
+                    openBook.putExtra("category", mCategory);
                     startActivity(openBook);
                 }
             }
@@ -97,10 +100,13 @@ public class InfoBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 downloadBook();
+                mBtnDownLoad.setEnabled(false);
+                mBtnDownLoad.setBackground(ContextCompat.getDrawable(InfoBookActivity.this, R.drawable.button_style_disable));
             }
         });
     }
-    public void loadBook(String child,String position){
+
+    public void loadBook(String child, String position) {
         mCategory = child;
         databaseReference.child(child).child(position).addValueEventListener(new ValueEventListener() {
             @Override
@@ -120,19 +126,21 @@ public class InfoBookActivity extends AppCompatActivity {
             }
         });
     }
-    public void init(){
-        mRecylerViewMore = (RecyclerView)findViewById(R.id.recyclerViewListInfoMore);
-        ScrollView scrollView = (ScrollView)findViewById(R.id.scrollViewInforBook);
+
+    public void init() {
+        mRecylerViewMore = (RecyclerView) findViewById(R.id.recyclerViewListInfoMore);
+        ScrollView scrollView = (ScrollView) findViewById(R.id.scrollViewInforBook);
         scrollView.fullScroll(View.FOCUS_DOWN);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        mTvInfoTitle = (TextView)findViewById(R.id.tvInfoTitle);
-        mTvInfoDescription = (TextView)findViewById(R.id.tvInfoDescription);
-        mImgBook = (ImageView)findViewById(R.id.imgInfoBook);
-        mImgBack = (ImageView)findViewById(R.id.imgBackInfo);
-        mBtnReadBook = (Button)findViewById(R.id.btnReadBook);
-        mBtnDownLoad = (Button)findViewById(R.id.btnDownLoad);
+        mTvInfoTitle = (TextView) findViewById(R.id.tvInfoTitle);
+        mTvInfoDescription = (TextView) findViewById(R.id.tvInfoDescription);
+        mImgBook = (ImageView) findViewById(R.id.imgInfoBook);
+        mImgBack = (ImageView) findViewById(R.id.imgBackInfo);
+        mBtnReadBook = (Button) findViewById(R.id.btnReadBook);
+        mBtnDownLoad = (Button) findViewById(R.id.btnDownLoad);
     }
-    public void downloadBook(){
+
+    public void downloadBook() {
         final String[] linkBooks = new String[1];
         final String[] linkImages = new String[1];
         try {
@@ -141,18 +149,16 @@ public class InfoBookActivity extends AppCompatActivity {
             islandRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-/*                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    mImgBook.setImageBitmap(bitmap);*/
-                    linkBooks[0] = localFile.getAbsolutePath().toString();
+                    linkBooks[0] = localFile.getAbsolutePath();
                     try {
-                        final File localFile2 = File.createTempFile("images",".jpg", getCacheDir());
+                        final File localFile2 = File.createTempFile("images", ".jpg", getCacheDir());
                         StorageReference imagesRef = storageRef.child(mLinkImage);
                         imagesRef.getFile(localFile2).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                linkImages[0] = localFile2.getAbsolutePath().toString();
+                                linkImages[0] = localFile2.getAbsolutePath();
                                 DatabaseHanderSDCard db = new DatabaseHanderSDCard(InfoBookActivity.this);
-                                db.addNewBookOnSdCard(new BookOnSdCard(mId,mLinkTitle,linkBooks[0],linkImages[0],mTvInfoDescription.getText().toString()));
+                                db.addNewBookOnSdCard(new BookOnSdCard(mId, mLinkTitle, linkBooks[0], linkImages[0], mTvInfoDescription.getText().toString()));
                                 Toast.makeText(InfoBookActivity.this, "Success", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -175,6 +181,13 @@ public class InfoBookActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void checkBookHaveInSdCard(String id) {
+        DatabaseHanderSDCard db = new DatabaseHanderSDCard(this);
+       if ( db.checkIdIsHaveOnSdCard(id)){
+           mBtnDownLoad.setEnabled(false);
+           mBtnDownLoad.setBackground(ContextCompat.getDrawable(InfoBookActivity.this, R.drawable.button_style_disable));
+       }
     }
 }

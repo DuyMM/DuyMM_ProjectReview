@@ -24,7 +24,7 @@
         <TextView
             android:layout_toRightOf="@id/imgBackFormSetting"
             android:layout_toEndOf="@+id/imgBackFormSetting"
-            android:text="SETTING"
+            android:text="@string/setting"
             android:textColor="@color/colorMain"
             android:textSize="18sp"
             android:layout_marginLeft="10dp"
@@ -39,21 +39,29 @@
         android:layout_below="@id/relativeToolbarSetting"
         android:id="@+id/cardViewSetting"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="wrap_content">
         <RelativeLayout
             android:padding="10dp"
             android:background="@color/colorDarkWhite"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_centerVertical="true"
                 android:id="@+id/tvNotificationSetting"
-                android:text="Notification"
+                android:text="@string/setting_notification"
                 android:textSize="15sp"
                 android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvSubNotificationSettingActivity"
+                android:text="@string/setting_notification_sub"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/tvNotificationSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <Switch
+                android:id="@+id/switchNotificationSetting"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -81,33 +89,39 @@
            android:background="@color/colorDarkWhite"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content">
-           <TextView
-               android:id="@+id/tvLaguageSettingActivity"
-               android:textColor="@color/colorGrey"
-               android:textSize="15dp"
-               android:text="Language"
-               android:layout_marginLeft="10dp"
-               android:layout_marginStart="10dp"
-               android:layout_marginEnd="10dp"
-               android:layout_marginRight="10dp"
+           <RelativeLayout
+               android:id="@+id/relativeLanguage"
                android:layout_width="match_parent"
-               android:layout_height="wrap_content" />
-           <TextView
-               android:id="@+id/tvSubLaguageSettingActivity"
-               android:text="English"
-               android:layout_marginLeft="10dp"
-               android:layout_marginStart="10dp"
-               android:layout_marginEnd="10dp"
-               android:layout_marginRight="10dp"
-               android:layout_below="@id/tvLaguageSettingActivity"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content" />
+               android:layout_height="wrap_content">
+               <TextView
+                   android:id="@+id/tvLaguageSettingActivity"
+                   android:textColor="@color/colorGrey"
+                   android:textSize="@dimen/setting_sub_title_text_size"
+                   android:text="@string/language"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginEnd="10dp"
+                   android:layout_marginRight="10dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
+               <TextView
+                   android:id="@+id/tvSubLaguageSettingActivity"
+                   android:text="@string/english"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginEnd="10dp"
+                   android:layout_marginRight="10dp"
+                   android:layout_below="@id/tvLaguageSettingActivity"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+           </RelativeLayout>
+
            <TextView
                android:id="@+id/tvFaceBookConnect"
-               android:layout_below="@+id/tvSubLaguageSettingActivity"
+               android:layout_below="@+id/relativeLanguage"
                android:textColor="@color/colorGrey"
-               android:textSize="15dp"
-               android:text="Facebook Connect"
+               android:textSize="@dimen/setting_sub_title_text_size"
+               android:text="@string/facebook_connect"
                android:layout_marginTop="10dp"
                android:layout_marginLeft="10dp"
                android:layout_marginStart="10dp"
@@ -120,7 +134,7 @@
                android:layout_marginStart="10dp"
                android:layout_marginEnd="10dp"
                android:layout_marginRight="10dp"
-               android:text="No connect"
+               android:text="@string/status_connect_facebook"
                android:layout_below="@id/tvFaceBookConnect"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content" />

@@ -24,6 +24,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.charset.Charset;
 
 public class ReadBookActivity extends AppCompatActivity implements SettingFragment.OnCallBackFormSettingFragment {
@@ -52,6 +57,7 @@ public class ReadBookActivity extends AppCompatActivity implements SettingFragme
     private String linkImage;
     private String id;
     private String category;
+    private String mStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,25 +76,16 @@ public class ReadBookActivity extends AppCompatActivity implements SettingFragme
         id = intent.getStringExtra("id");
         title = intent.getStringExtra("title");
         category = intent.getStringExtra("category");
+        mStatus = intent.getStringExtra("status");
          storageRef = storage.getReference(linkBook);
         //mProgressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorMain), PorterDuff.Mode.SRC_IN);
         // mProgressBar.setProgressBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorMain)));
         // mProgressBar.getThumb().setColorFilter(getResources().getColor(R.color.colorMain), PorterDuff.Mode.SRC_IN);
-        final long ONE_MEGABYTE = 1024 * 1024;
-        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                // Data for "images/island.jpg" is returns, use this as needed
-                String str = new String(bytes, Charset.forName("utf-8"));
-                mTvReadBook.setText(str);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
-
+    if ("sd".equals(mStatus)){
+        readBookOnSDcard(linkBook);
+    }else {
+        readBookOnFirebase();
+    }
         mScrollView.setVerticalScrollBarEnabled(false);
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
@@ -176,5 +173,39 @@ public class ReadBookActivity extends AppCompatActivity implements SettingFragme
     public void addFavoriteBook() {
         db.addNewFavoriteBook(new BookInFireBase(title+"","",linkImage+"",linkBook+"",id+"","0",category+""));
         Toast.makeText(this,"Success", Toast.LENGTH_SHORT).show();
+    }
+    public void readBookOnSDcard(String position){
+        File yourfile = new File(position);
+        StringBuilder text = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(yourfile));
+            String line;
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mTvReadBook.setText(text    );
+    }
+    public void readBookOnFirebase(){
+        final long ONE_MEGABYTE = 1024 * 1024;
+        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Data for "images/island.jpg" is returns, use this as needed
+                String str = new String(bytes, Charset.forName("utf-8"));
+                mTvReadBook.setText(str);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
     }
 }

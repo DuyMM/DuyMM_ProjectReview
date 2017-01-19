@@ -9,7 +9,7 @@
 <TextView
     android:id="@+id/splashTitle"
     android:textSize="50sp"
-    android:text="rBook"
+    android:text="@string/app_name"
     android:textColor="@color/colorWhite"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"

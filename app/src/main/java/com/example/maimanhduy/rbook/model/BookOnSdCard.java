@@ -9,25 +9,24 @@ public class BookOnSdCard {
     private String title;
     private String linkBook;
     private String linkImage;
-    private String author;
-
+    private String category;
     public BookOnSdCard() {
     }
 
-    public BookOnSdCard(String id, String title, String linkBook, String linkImage, String author) {
+    public BookOnSdCard(String id, String title, String linkBook, String linkImage, String category) {
         this.id = id;
         this.title = title;
         this.linkBook = linkBook;
         this.linkImage = linkImage;
-        this.author = author;
+        this.category = category;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getCategory() {
+        return category;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getId() {

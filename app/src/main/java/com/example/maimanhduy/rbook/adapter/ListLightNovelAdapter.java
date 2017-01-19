@@ -45,7 +45,7 @@ public class ListLightNovelAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         ListLightNovelViewHolder viewHolder= (ListLightNovelViewHolder)holder;
         viewHolder.tvListLightNovelItemTitle.setText(arrBookInFireBase.get(position).getTitleBook());
         viewHolder.tvListLightNovelItemAuthor.setText(arrBookInFireBase.get(position).getAuthorName());
-        Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).centerCrop().placeholder(R.drawable.image1).crossFade().into(viewHolder.imgListLightNovel);
+        Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).centerCrop().placeholder(R.drawable.ic_sync).crossFade().into(viewHolder.imgListLightNovel);
         viewHolder.imgListLightNovel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

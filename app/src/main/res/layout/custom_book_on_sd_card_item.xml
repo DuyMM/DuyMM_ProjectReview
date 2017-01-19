@@ -19,6 +19,7 @@
         android:layout_toLeftOf="@+id/imgBookOnSDcardItem"
         android:layout_toStartOf="@+id/imgBookOnSDcardItem" />
     <TextView
+        android:id="@+id/tvBookOnSdCardCategoryItem"
         android:layout_marginStart="@dimen/tv_book_on_sdcard_author_margin_left"
         android:layout_marginLeft="@dimen/tv_book_on_sdcard_author_margin_left"
         android:textStyle="bold"

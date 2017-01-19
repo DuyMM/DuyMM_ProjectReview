@@ -95,4 +95,5 @@
     <dimen name="tvfont_style_a_small">25sp</dimen>
     <dimen name="tvfont_style_a_big">40sp</dimen>
     <dimen name="tv_setting_content_margin">15dp</dimen>
+    <dimen name="setting_sub_title_text_size">15sp</dimen>
 </resources>

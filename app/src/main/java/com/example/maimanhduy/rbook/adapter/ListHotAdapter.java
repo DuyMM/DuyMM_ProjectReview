@@ -46,8 +46,8 @@ public class ListHotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
            viewHolder.tvTopItem.setText(position+1+"");
         viewHolder.tvTitleItem.setText(arrListHot.get(position).getTitleBook());
         viewHolder.tvAuthorItem.setText(arrListHot.get(position).getAuthorName());
-        Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).centerCrop().crossFade().into(viewHolder.imgHotItem);
-        viewHolder.imgHotItem.setOnClickListener(new View.OnClickListener() {
+        Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).placeholder(R.drawable.ic_sync).centerCrop().crossFade().into(viewHolder.imgHotItem);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.openInfoBookFormListHot(arrListHot.get(holder.getAdapterPosition()).getId(),arrListHot.get(holder.getAdapterPosition()).getBookCategory());

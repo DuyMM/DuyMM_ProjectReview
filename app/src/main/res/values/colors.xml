@@ -10,4 +10,5 @@
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#585858</color>
     <color name="translaterBlack">#80000000</color>
+    <color name="colorRed">#E04A39</color>
 </resources>

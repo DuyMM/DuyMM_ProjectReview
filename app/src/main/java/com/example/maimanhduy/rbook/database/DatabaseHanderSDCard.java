@@ -29,7 +29,7 @@ public class DatabaseHanderSDCard extends SQLiteOpenHelper {
     private static final String COLUMN_SDBOOK_TITLE = "Title";
     private static final String COLUMN_SDBOOK_BOOK = "Book";
     private static final String COLUMN_SDBOOK_IMAGE = "Image";
-    private static final String COLUMN_SDBOOK_AUTHOR = "Author";
+    private static final String COLUMN_SDBOOK_AUTHOR = "Category";
     public DatabaseHanderSDCard(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -44,6 +44,11 @@ public class DatabaseHanderSDCard extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+    public void deleteBookOnSdCard(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_BOOK_SD, COLUMN_SDBOOK_ID + " = ?", new String[]{id});
+        db.close();
+    }
     public void addNewBookOnSdCard(BookOnSdCard book){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -51,7 +56,7 @@ public class DatabaseHanderSDCard extends SQLiteOpenHelper {
         values.put(COLUMN_SDBOOK_TITLE, book.getTitle());
         values.put(COLUMN_SDBOOK_BOOK,book.getLinkBook());
         values.put(COLUMN_SDBOOK_IMAGE,book.getLinkImage());
-        values.put(COLUMN_SDBOOK_AUTHOR, book.getAuthor());
+        values.put(COLUMN_SDBOOK_AUTHOR, book.getCategory());
         db.insert(TABLE_BOOK_SD, null, values);
         db.close();
     }
@@ -68,10 +73,22 @@ public class DatabaseHanderSDCard extends SQLiteOpenHelper {
                 book.setTitle(cursor.getString(1));
                 book.setLinkBook(cursor.getString(2));
                 book.setLinkImage(cursor.getString(3));
-                book.setAuthor(cursor.getString(4));
+                book.setCategory(cursor.getString(4));
                 arrBookOnSDCard.add(book);
             } while (cursor.moveToNext());
         }
         return arrBookOnSDCard;
+    }
+    public boolean checkIdIsHaveOnSdCard(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectId = "SELECT * FROM "+ TABLE_BOOK_SD+" WHERE "+ COLUMN_SDBOOK_ID+" = "+"'"+id+"'";
+        Cursor cursor = db.rawQuery(selectId,null);
+        if (cursor.moveToFirst()){
+            db.close();
+            return true;
+        }else {
+            db.close();
+            return false;
+        }
     }
 }

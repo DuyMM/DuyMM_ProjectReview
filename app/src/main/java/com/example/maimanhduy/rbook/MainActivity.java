@@ -27,6 +27,7 @@ import com.example.maimanhduy.rbook.adapter.ListHotAdapter;
 import com.example.maimanhduy.rbook.adapter.ListLightNovelAdapter;
 import com.example.maimanhduy.rbook.adapter.ListNewAdapter;
 import com.example.maimanhduy.rbook.adapter.MainRecyclerAdapter;
+import com.example.maimanhduy.rbook.language.ChangeLaguage;
 import com.example.maimanhduy.rbook.model.BookInFireBase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements ListNewAdapter.callBackFormListNew, ListLightNovelAdapter.CallBackMainFormListLightNovel, ListHotAdapter.callBackFormListHot {
     private RecyclerView mRecyclerViewMain;
@@ -51,18 +53,22 @@ public class MainActivity extends AppCompatActivity implements ListNewAdapter.ca
     private ArrayList<BookInFireBase> arrListOther = new ArrayList<>();
     private ArrayList<BookInFireBase> arrListHot = new ArrayList<>();
     private ArrayList<BookInFireBase> arrListNew = new ArrayList<>();
+    private ArrayList<BookInFireBase> arrSpecial = new ArrayList<>();
     private DatabaseReference databaseReference;
+    private Random mRandomGeneral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ChangeLaguage changeLaguage = new ChangeLaguage();
+        changeLaguage.localLanguage(this);
         setContentView(R.layout.activity_main);
         init();
         setupToolBar();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
         mRecyclerViewMain.setHasFixedSize(true);
         mRecyclerViewMain.setLayoutManager(linearLayoutManager);
-        mMainRecylerAdapter = new MainRecyclerAdapter(MainActivity.this, arrListLightNovel, arrListComic, arrListOther, arrListNew, arrListHot);
+        mMainRecylerAdapter = new MainRecyclerAdapter(MainActivity.this, arrListLightNovel, arrListComic, arrListOther, arrListNew, arrListHot, arrSpecial);
         mRecyclerViewMain.setAdapter(mMainRecylerAdapter);
         LoadDataAsyncTask async = new LoadDataAsyncTask();
         async.execute();
@@ -175,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements ListNewAdapter.ca
                     //Log.d("ThongTin",title+"-"+author+"-"+linkImage+"-"+linkBook+"-"+id);
                     arrListLightNovel.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
                 }
+                Collections.reverse(arrListLightNovel);
                 mMainRecylerAdapter.notifyItemChanged(3);
             }
 
@@ -273,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements ListNewAdapter.ca
         }
     }
     private void loadNewList(){
-        databaseReference.child(getString(R.string.lightnovel)).limitToFirst(3).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(getString(R.string.lightnovel)).limitToLast(3).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
@@ -300,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements ListNewAdapter.ca
                     arrListHot.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
                     arrListNew.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
                 }
-                databaseReference.child(getString(R.string.other)).limitToFirst(3).addValueEventListener(new ValueEventListener() {
+                databaseReference.child(getString(R.string.other)).limitToLast(3).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snap : dataSnapshot.getChildren()) {
@@ -326,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements ListNewAdapter.ca
                             }
                             arrListHot.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
                             arrListNew.add(new BookInFireBase(title, author, linkImage, linkBook, id, views,dataSnapshot.getKey()));
-                            databaseReference.child(getString(R.string.comic)).limitToFirst(3).addValueEventListener(new ValueEventListener() {
+                            databaseReference.child(getString(R.string.comic)).limitToLast(3).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot snap : dataSnapshot.getChildren()) {
@@ -379,6 +386,7 @@ public class MainActivity extends AppCompatActivity implements ListNewAdapter.ca
         });
     }
     private void avgListHot(){
+        loadSpecial();
         Collections.sort(arrListHot, new Comparator<BookInFireBase>() {
             @Override
             public int compare(BookInFireBase book1, BookInFireBase book2) {
@@ -400,5 +408,15 @@ public class MainActivity extends AppCompatActivity implements ListNewAdapter.ca
         intent.putExtra("id",position);
         intent.putExtra("category",category);
         startActivity(intent);
+    }
+    public void loadSpecial(){
+            mRandomGeneral = new Random();
+                int index = mRandomGeneral.nextInt(arrListLightNovel.size());
+                arrSpecial.add(arrListLightNovel.get(index));
+                int index2 = mRandomGeneral.nextInt(arrListComic.size());
+                arrSpecial.add(arrListComic.get(index2));
+                int index3 = mRandomGeneral.nextInt(arrListOther.size());
+                arrSpecial.add(arrListOther.get(index3));
+        mMainRecylerAdapter.notifyItemChanged(0);
     }
 }
