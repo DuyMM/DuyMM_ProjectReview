@@ -81,32 +81,32 @@ public class FavoriteListLightNovelFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorite_list_light_novel, container, false);
         db = new DatabaseHanderHelper(getActivity());
         ArrayList<BookInFireBase> listGenerel = db.getAllFavoriteBook();
-        for (int i=0;i<listGenerel.size();i++){
-            if (getString(R.string.lightnovel).equals(listGenerel.get(i).getBookCategory())){
+        for (int i = 0; i < listGenerel.size(); i++) {
+            if (getString(R.string.lightnovel).equals(listGenerel.get(i).getBookCategory())) {
                 arrListLightNovel.add(listGenerel.get(i));
             }
-            if (getString(R.string.comic).equals(listGenerel.get(i).getBookCategory())){
+            if (getString(R.string.comic).equals(listGenerel.get(i).getBookCategory())) {
                 arrListComic.add(listGenerel.get(i));
             }
-            if (getString(R.string.other).equals(listGenerel.get(i).getBookCategory())){
+            if (getString(R.string.other).equals(listGenerel.get(i).getBookCategory())) {
                 arrListOther.add(listGenerel.get(i));
             }
         }
-        recyclerViewFavoriteLightNovel = (RecyclerView)view.findViewById(R.id.recycerViewFavoriteLightNovel);
-        if (mParam1.equals("0")){
-             adapter = new ListFavoriteAdapter(arrListLightNovel, getActivity());
+        recyclerViewFavoriteLightNovel = (RecyclerView) view.findViewById(R.id.recycerViewFavoriteLightNovel);
+        if (mParam1.equals("0")) {
+            adapter = new ListFavoriteAdapter(arrListLightNovel, getActivity());
         }
-        if (mParam1.equals("1")){
+        if (mParam1.equals("1")) {
             adapter = new ListFavoriteAdapter(arrListComic, getActivity());
         }
-        if (mParam1.equals("2")){
+        if (mParam1.equals("2")) {
             adapter = new ListFavoriteAdapter(arrListOther, getActivity());
         }
         LinearLayoutManager lln = new LinearLayoutManager(getActivity());
         recyclerViewFavoriteLightNovel.setHasFixedSize(true);
         recyclerViewFavoriteLightNovel.setLayoutManager(lln);
         recyclerViewFavoriteLightNovel.setAdapter(adapter);
-       // Toast.makeText(getActivity(), mParam1, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getActivity(), mParam1, Toast.LENGTH_SHORT).show();
         return view;
     }
 
@@ -144,6 +144,19 @@ public class FavoriteListLightNovelFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+    public void removeBook(int pos, String category) {
+        if (getString(R.string.lightnovel).equals(category)) {
+            arrListLightNovel.remove(pos);
+        }
+        if (getString(R.string.comic).equals(category)) {
+            arrListComic.remove(pos);
+        }
+        if (getString(R.string.other).equals(category)) {
+            arrListOther.remove(pos);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

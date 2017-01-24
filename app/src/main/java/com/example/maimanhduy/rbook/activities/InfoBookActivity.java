@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,10 +19,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.maimanhduy.rbook.R;
-import com.example.maimanhduy.rbook.adapter.ListInfoMoreBookAdapter;
 import com.example.maimanhduy.rbook.database.DatabaseHanderSDCard;
 import com.example.maimanhduy.rbook.model.BookOnSdCard;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -54,7 +56,7 @@ public class InfoBookActivity extends AppCompatActivity {
     private String mLinkTitle;
     private String mId;
     private String mCategory;
-
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +67,45 @@ public class InfoBookActivity extends AppCompatActivity {
             window.setStatusBarColor(getResources().getColor(R.color.colorMain));
         }
         init();
-        LinearLayoutManager lln = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+      /*  LinearLayoutManager lln = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecylerViewMore.setHasFixedSize(true);
         mRecylerViewMore.setLayoutManager(lln);
         ListInfoMoreBookAdapter adapter = new ListInfoMoreBookAdapter();
-        mRecylerViewMore.setAdapter(adapter);
+        mRecylerViewMore.setAdapter(adapter);*/
+        mAdView = (AdView)this.findViewById(R.id.adViewInfo);
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                Log.d("failed",i+"");
+                super.onAdFailedToLoad(i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                Log.d("show","show");
+                super.onAdLeftApplication();
+            }
+
+            @Override
+            public void onAdOpened() {
+                Log.d("click","open");
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                Log.d("load","done");
+                super.onAdLoaded();
+            }
+        });
         Intent intent = getIntent();
         String category = intent.getStringExtra("category");
         String position = intent.getStringExtra("id");
@@ -108,12 +144,13 @@ public class InfoBookActivity extends AppCompatActivity {
 
     public void loadBook(String child, String position) {
         mCategory = child;
-        databaseReference.child(child).child(position).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("vi").child(child).child(position).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mTvInfoTitle.setText(dataSnapshot.child(getString(R.string.title)).getValue().toString());
                 mTvInfoDescription.setText(dataSnapshot.child(getString(R.string.author)).getValue().toString());
                 stogareReference = storage.getReference(dataSnapshot.child(getString(R.string.linkimage)).getValue().toString());
+                Glide.with(InfoBookActivity.this).pauseRequests();
                 Glide.with(InfoBookActivity.this).using(new FirebaseImageLoader()).load(stogareReference).centerCrop().crossFade().into(mImgBook);
                 mLinkBook = dataSnapshot.child(getString(R.string.linkbook)).getValue().toString();
                 mLinkImage = dataSnapshot.child(getString(R.string.linkimage)).getValue().toString();
@@ -128,7 +165,12 @@ public class InfoBookActivity extends AppCompatActivity {
     }
 
     public void init() {
-        mRecylerViewMore = (RecyclerView) findViewById(R.id.recyclerViewListInfoMore);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorMain));
+        }
+       /* mRecylerViewMore = (RecyclerView) findViewById(R.id.recyclerViewListInfoMore);*/
         ScrollView scrollView = (ScrollView) findViewById(R.id.scrollViewInforBook);
         scrollView.fullScroll(View.FOCUS_DOWN);
         databaseReference = FirebaseDatabase.getInstance().getReference();

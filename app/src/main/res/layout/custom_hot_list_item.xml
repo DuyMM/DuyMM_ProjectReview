@@ -9,7 +9,6 @@
 <ImageView
     android:id="@+id/imgListHotItem"
     android:contentDescription="@null"
-    android:src="@drawable/hot1"
     android:layout_width="@dimen/hot_item_height"
     android:layout_height="@dimen/hot_item_height" />
     <TextView

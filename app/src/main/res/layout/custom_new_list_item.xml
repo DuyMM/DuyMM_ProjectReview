@@ -9,8 +9,7 @@
         android:id="@+id/imgListNewItem"
         android:layout_width="@dimen/img_new_item_width"
         android:layout_height="@dimen/img_new_item_height"
-        android:contentDescription="@null"
-        android:src="@drawable/hot1" />
+        android:contentDescription="@null" />
 
     <TextView
         android:id="@+id/tvListNewItemTitle"

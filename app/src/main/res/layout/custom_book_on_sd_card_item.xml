@@ -38,7 +38,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/info_img"
         android:layout_width="@dimen/img_book_on_sdcard_width"
         android:layout_height="@dimen/img_book_on_sdcard_height"
         android:id="@+id/imgBookOnSDcardItem" />

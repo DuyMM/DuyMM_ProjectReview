@@ -2,14 +2,15 @@ package com.example.maimanhduy.rbook.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.maimanhduy.rbook.MainActivity;
 import com.example.maimanhduy.rbook.R;
 import com.example.maimanhduy.rbook.model.BookInFireBase;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -22,13 +23,14 @@ import java.util.ArrayList;
  * Created by MaiManhDuy on 12/23/2016.
  */
 
- class SlideSwipeAdapter extends PagerAdapter {
-    private int[] image_resources ={R.drawable.image1,R.drawable.image2,R.drawable.image3,R.drawable.image4,R.drawable.image5 };
+public class SlideSwipeAdapter extends PagerAdapter {
+    private int pos;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private ArrayList<BookInFireBase> arraySpecial  = new ArrayList<>();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference;
+    private onCallBackFormSlide mListener;
      SlideSwipeAdapter(Context mContext, ArrayList<BookInFireBase> arraySpecial){
         this.mContext = mContext;
         mLayoutInflater = LayoutInflater.from(mContext);
@@ -37,25 +39,28 @@ import java.util.ArrayList;
 
     @Override
     public int getCount() {
-
-      //  return image_resources.length;
-        return 3;
+   return 3;
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, final int position) {
+    public Object instantiateItem(ViewGroup container,final int position) {
+        mListener = (MainActivity)container.getContext();
         mLayoutInflater =(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view =mLayoutInflater.inflate(R.layout.custom_slide_item,container,false);
         ImageView imageView = (ImageView)view.findViewById(R.id.imgSlideItem);
+        TextView tvTitle = (TextView)view.findViewById(R.id.tvSlideTitle);
+        TextView tvAuthor = (TextView)view.findViewById(R.id.tvSlideAuthor);
         if (arraySpecial.size()==0){
-            imageView.setImageResource(image_resources[position]);
+            imageView.setImageResource(R.drawable.ic_sync);
         }else {
             storageReference = storage.getReference(arraySpecial.get(position).getLinkImage());
             Glide.with(mContext).using(new FirebaseImageLoader()).load(storageReference).crossFade().centerCrop().into(imageView);
+            tvTitle.setText(arraySpecial.get(position).getTitleBook());
+            tvAuthor.setText(arraySpecial.get(position).getAuthorName());
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("pos",position+"");
+                    mListener.openBookOnSlide(arraySpecial.get(position).getBookCategory(),arraySpecial.get(position).getId());
                 }
             });
         }
@@ -71,5 +76,8 @@ import java.util.ArrayList;
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return (view ==(RelativeLayout)object);
+    }
+    public interface onCallBackFormSlide{
+        void openBookOnSlide(String category,String position);
     }
 }

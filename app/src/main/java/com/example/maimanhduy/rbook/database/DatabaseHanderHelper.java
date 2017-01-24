@@ -90,4 +90,16 @@ public class DatabaseHanderHelper extends SQLiteOpenHelper {
         }
         return arrFavorite;
     }
+    public boolean checkFavoriteBookHaveInPhone(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectId = "SELECT * FROM "+ TABLE_FAVORITE+" WHERE "+ COLUMN_FAVORITE_ID+" = "+"'"+id+"'";
+        Cursor cursor = db.rawQuery(selectId,null);
+        if (cursor.moveToFirst()){
+            db.close();
+            return true;
+        }else {
+            db.close();
+            return false;
+        }
+    }
 }

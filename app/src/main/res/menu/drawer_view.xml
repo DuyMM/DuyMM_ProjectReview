@@ -22,11 +22,9 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/nav_about_me"
                     android:icon="@drawable/ic_info"
                     android:title="@string/about_menu" />
-                <item
-                    android:icon="@drawable/ic_info"
-                    android:title="@string/rate_my_app_menu" />
             </group>
         </menu>
     </item>

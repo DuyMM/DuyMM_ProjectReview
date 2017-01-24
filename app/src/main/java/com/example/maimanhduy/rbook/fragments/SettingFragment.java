@@ -44,6 +44,7 @@ public class SettingFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String[] arr = {"Roboto", "ArimalMadurai", "BalooChettan", "Lemonada", "OpenSans"};
+    private boolean check;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -155,10 +156,12 @@ public class SettingFragment extends Fragment {
 
             }
         });
+        Log.d("cay","1");
         mImgAddFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                mListener.addFavoriteBook();
+                mImgAddFavorite.setVisibility(View.INVISIBLE);
             }
         });
         return view;
@@ -188,7 +191,6 @@ public class SettingFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

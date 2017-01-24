@@ -36,27 +36,38 @@ public class ListNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mListener = (MainActivity) parent.getContext();
-        return new ListNewViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_new_list_item, parent,false));
+       if (arrListNew.size()==0){
+           return new ListLoading(LayoutInflater.from(parent.getContext()).inflate(R.layout.loading_item, parent,false));
+       }else {
+           return new ListNewViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_new_list_item, parent,false));
+       }
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        ListNewViewHolder viewHolder = (ListNewViewHolder)holder;
-         storageReference = storage.getReference(arrListNew.get(position).getLinkImage());
-        viewHolder.tvTitleHotItem.setText(arrListNew.get(position).getTitleBook());
-        viewHolder.tvAuthorHotItem.setText(arrListNew.get(position).getAuthorName());
-        Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).placeholder(R.drawable.ic_sync).centerCrop().crossFade().into(viewHolder.imgListHotItem);
-        viewHolder.imgListHotItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.openInforBookListNew(arrListNew.get(holder.getAdapterPosition()).getBookCategory(),arrListNew.get(holder.getAdapterPosition()).getId());
-            }
-        });
+       if (arrListNew.size()!=0){
+           ListNewViewHolder viewHolder = (ListNewViewHolder)holder;
+           storageReference = storage.getReference(arrListNew.get(position).getLinkImage());
+           viewHolder.tvTitleHotItem.setText(arrListNew.get(position).getTitleBook());
+           viewHolder.tvAuthorHotItem.setText(arrListNew.get(position).getAuthorName());
+           Glide.with(context).using(new FirebaseImageLoader()).load(storageReference).placeholder(R.drawable.ic_sync).centerCrop().crossFade().into(viewHolder.imgListHotItem);
+           viewHolder.imgListHotItem.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   mListener.openInforBookListNew(arrListNew.get(holder.getAdapterPosition()).getBookCategory(),arrListNew.get(holder.getAdapterPosition()).getId());
+               }
+           });
+       }
     }
 
     @Override
     public int getItemCount() {
-        return arrListNew.size();
+        if (arrListNew.size()==0){
+            return 1;
+        }else {
+            return arrListNew.size();
+        }
+
     }
     private class ListNewViewHolder extends RecyclerView.ViewHolder{
          TextView tvTitleHotItem;
@@ -67,6 +78,12 @@ public class ListNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvTitleHotItem = (TextView)itemView.findViewById(R.id.tvListNewItemTitle);
             tvAuthorHotItem = (TextView)itemView.findViewById(R.id.tvListNewItemAuthor);
             imgListHotItem = (ImageView)itemView.findViewById(R.id.imgListNewItem);
+        }
+    }
+    private class ListLoading extends RecyclerView.ViewHolder{
+
+        public ListLoading(View itemView) {
+            super(itemView);
         }
     }
     public interface callBackFormListNew{

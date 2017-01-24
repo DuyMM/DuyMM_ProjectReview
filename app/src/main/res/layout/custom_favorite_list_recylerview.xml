@@ -9,7 +9,6 @@
         <ImageView
             android:id="@+id/imgFavoriteRecylerView"
             android:contentDescription="@null"
-            android:src="@drawable/favorite1"
             android:scaleType="centerCrop"
             android:layout_width="@dimen/img_favorite_title_recylerview_width"
             android:layout_height="@dimen/img_favorite_title_recylerview_width" />

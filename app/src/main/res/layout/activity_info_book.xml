@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_info_book"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <ScrollView
+            android:layout_marginBottom="50dp"
             android:id="@+id/scrollViewInforBook"
             android:focusableInTouchMode="true"
             android:background="@color/colorDarkWhite"
@@ -25,21 +27,20 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
               <ImageView
+                  android:layout_centerHorizontal="true"
                   android:id="@+id/imgInfoBook"
                   android:scaleType="centerCrop"
-                  android:src="@drawable/info_img"
                   android:contentDescription="@null"
                   android:layout_width="@dimen/info_book_img_width"
                   android:layout_height="@dimen/info_book_img_height" />
               <TextView
+                  android:layout_below="@id/imgInfoBook"
                   android:layout_marginLeft="@dimen/tv_info_title_margin_left"
                   android:layout_marginStart="@dimen/tv_info_title_margin_left"
                   android:textSize="@dimen/tv_info_title_txt_size"
                   android:padding="@dimen/tv_info_title_padding"
                   android:id="@+id/tvInfoDescription"
                   android:text="@string/default_content"
-                  android:layout_toRightOf="@id/imgInfoBook"
-                  android:layout_toEndOf="@id/imgInfoBook"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:textStyle="normal"
@@ -48,8 +49,6 @@
                   android:layout_marginLeft="@dimen/btn_read_book_magin_left"
                   android:layout_marginStart="@dimen/btn_read_book_magin_left"
                   android:layout_below="@id/tvInfoDescription"
-                  android:layout_toRightOf="@id/imgInfoBook"
-                  android:layout_toEndOf="@id/imgInfoBook"
                   android:id="@+id/btnReadBook"
                   android:text="@string/info_book_btn_read_title"
                   android:textColor="@color/colorWhite"
@@ -64,8 +63,6 @@
                   android:textSize="@dimen/tv_or_text_size"
                   android:text="@string/tv_or_title"
                   android:textAlignment="center"
-                  android:layout_toRightOf="@id/imgInfoBook"
-                  android:layout_toEndOf="@id/imgInfoBook"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:textStyle="normal|bold"
@@ -74,29 +71,12 @@
                   android:layout_marginLeft="@dimen/btn_read_book_magin_left"
                   android:layout_marginStart="@dimen/btn_read_book_magin_left"
                   android:layout_below="@id/tvOr"
-                  android:layout_toRightOf="@id/imgInfoBook"
-                  android:layout_toEndOf="@id/imgInfoBook"
                   android:id="@+id/btnDownLoad"
                   android:text="@string/info_book_btn_download_title"
                   android:textColor="@color/colorWhite"
                   android:background="@drawable/button_style"
                   android:layout_width="match_parent"
                   android:layout_height="@dimen/btn_read_book_height" />
-              <TextView
-                  android:layout_marginTop="@dimen/tv_info_more_book_margin_top"
-                  android:id="@+id/tvInfoMoreBook"
-                  android:layout_below="@id/imgInfoBook"
-                  android:text="@string/tv_info_more_book_title"
-                  android:textColor="@color/colorBlack"
-                  android:fontFamily="monospace"
-                  android:textStyle="normal|bold"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content" />
-              <android.support.v7.widget.RecyclerView
-                  android:id="@+id/recyclerViewListInfoMore"
-                  android:layout_below="@id/tvInfoMoreBook"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"/>
           </RelativeLayout>
         </ScrollView>
         </RelativeLayout>
@@ -130,4 +110,13 @@
             android:typeface="monospace"
             android:textSize="@dimen/info_book_title_text_size" />
     </RelativeLayout>
+    <com.google.android.gms.ads.AdView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/adViewInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ads">
+    </com.google.android.gms.ads.AdView>
 </RelativeLayout>

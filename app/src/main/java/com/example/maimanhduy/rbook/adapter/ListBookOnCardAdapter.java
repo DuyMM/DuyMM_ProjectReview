@@ -32,35 +32,45 @@ public class ListBookOnCardAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mListener = (BookInSdCardActivity)parent.getContext();
-        return new ListbookViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_book_on_sd_card_item,parent,false));
+       if (arrBookOnSDcard.size()==0){
+           return new EmptyItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.empty_item,parent,false));
+       }else {
+           return new ListbookViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_book_on_sd_card_item,parent,false));
+       }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder,  int position) {
-        final ListbookViewHolder viewHolder = (ListbookViewHolder) holder;
-        viewHolder.tvTitle.setText(arrBookOnSDcard.get(position).getTitle());
-        //Bitmap bitmap = BitmapFactory.decodeFile(arrBookOnSDcard.get(position).getLinkImage());
-        //viewHolder.imgBook.setImageBitmap(bitmap);
-        Glide.with(context).load(new File(arrBookOnSDcard.get(position).getLinkImage())).centerCrop().crossFade().into(viewHolder.imgBook);
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.openBookSdCard(arrBookOnSDcard.get(viewHolder.getAdapterPosition()).getLinkBook());
-            }
-        });
-        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                mListener.updateRecylerView(viewHolder.getAdapterPosition());
-                return false;
-            }
-        });
-        viewHolder.tvCategory.setText(arrBookOnSDcard.get(position).getCategory());
+       if (arrBookOnSDcard.size()>0){
+           final ListbookViewHolder viewHolder = (ListbookViewHolder) holder;
+           viewHolder.tvTitle.setText(arrBookOnSDcard.get(position).getTitle());
+           //Bitmap bitmap = BitmapFactory.decodeFile(arrBookOnSDcard.get(position).getLinkImage());
+           //viewHolder.imgBook.setImageBitmap(bitmap);
+           Glide.with(context).load(new File(arrBookOnSDcard.get(position).getLinkImage())).centerCrop().crossFade().into(viewHolder.imgBook);
+           viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   mListener.openBookSdCard(arrBookOnSDcard.get(viewHolder.getAdapterPosition()).getLinkBook());
+               }
+           });
+           viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+               @Override
+               public boolean onLongClick(View view) {
+                   mListener.updateRecylerView(viewHolder.getAdapterPosition());
+                   return false;
+               }
+           });
+           viewHolder.tvCategory.setText(arrBookOnSDcard.get(position).getCategory());
+       }
     }
 
     @Override
     public int getItemCount() {
-        return arrBookOnSDcard.size();
+        if (arrBookOnSDcard.size()==0){
+            return 1;
+        }else {
+            return arrBookOnSDcard.size();
+        }
     }
     private class ListbookViewHolder extends RecyclerView.ViewHolder{
         private TextView tvTitle;
@@ -76,5 +86,11 @@ public class ListBookOnCardAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public interface onCallBackFormListBookSDCardAdapter{
         void openBookSdCard(String linkBook);
         void updateRecylerView(int position);
+    }
+
+    private class EmptyItemViewHolder extends RecyclerView.ViewHolder{
+         EmptyItemViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 }

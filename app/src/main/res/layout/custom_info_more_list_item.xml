@@ -7,7 +7,6 @@
 <ImageView
     android:contentDescription="@null"
     android:id="@+id/imgListInfoMoreItem"
-    android:src="@drawable/info_img"
     android:scaleType="centerCrop"
     android:layout_width="150dp"
     android:layout_height="180dp" />

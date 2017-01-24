@@ -7,7 +7,6 @@
 <ImageView
     android:contentDescription="@null"
     android:id="@+id/imgListLightNovelItem"
-    android:src="@drawable/image3"
     android:layout_width="@dimen/img_light_novel_width"
     android:layout_height="@dimen/img_light_novel_height" />
     <TextView

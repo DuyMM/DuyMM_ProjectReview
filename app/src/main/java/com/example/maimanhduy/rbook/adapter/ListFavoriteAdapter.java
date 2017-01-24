@@ -36,27 +36,44 @@ public class ListFavoriteAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mListener = (FavoriteBookActivity)parent.getContext();
-        return new ListFavoriteBookViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_favorite_list_recylerview,parent,false));
+        if (arrListFavorite.size()==0){
+            return new EmptyViewholder(LayoutInflater.from(parent.getContext()).inflate(R.layout.empty_item,parent,false));
+        }else {
+            return new ListFavoriteBookViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_favorite_list_recylerview,parent,false));
+        }
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        storageRef = storage.getReference(arrListFavorite.get(position).getLinkImage());
-        ListFavoriteBookViewHolder viewHolder = (ListFavoriteBookViewHolder)holder;
-        viewHolder.tvAuthor.setText(arrListFavorite.get(position).getAuthorName());
-        viewHolder.tvTitle.setText(arrListFavorite.get(position).getTitleBook());
-        Glide.with(context).using(new FirebaseImageLoader()).load(storageRef).placeholder(R.drawable.ic_sync).centerCrop().crossFade().into(viewHolder.imgFavorite);
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.openBook(arrListFavorite.get(holder.getAdapterPosition()).getId(),arrListFavorite.get(holder.getAdapterPosition()).getLinkBook());
-            }
-        });
+       if (arrListFavorite.size()!=0){
+           storageRef = storage.getReference(arrListFavorite.get(position).getLinkImage());
+           ListFavoriteBookViewHolder viewHolder = (ListFavoriteBookViewHolder)holder;
+           viewHolder.tvAuthor.setText(arrListFavorite.get(position).getAuthorName());
+           viewHolder.tvTitle.setText(arrListFavorite.get(position).getTitleBook());
+           Glide.with(context).using(new FirebaseImageLoader()).load(storageRef).placeholder(R.drawable.ic_sync).centerCrop().crossFade().into(viewHolder.imgFavorite);
+           viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   mListener.openBook(arrListFavorite.get(holder.getAdapterPosition()).getId(),arrListFavorite.get(holder.getAdapterPosition()).getLinkBook());
+               }
+           });
+           viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+               @Override
+               public boolean onLongClick(View view) {
+                   mListener.deleteBookFormFavorite(arrListFavorite.get(holder.getAdapterPosition()).getId(),arrListFavorite.get(holder.getAdapterPosition()).getBookCategory(),holder.getAdapterPosition());
+                   return false;
+               }
+           });
+       }
     }
 
     @Override
     public int getItemCount() {
-        return arrListFavorite.size();
+        if (arrListFavorite.size()==0){
+            return 1;
+        }else {
+            return arrListFavorite.size();
+        }
     }
     private class ListFavoriteBookViewHolder extends RecyclerView.ViewHolder{
         ImageView imgFavorite;
@@ -71,5 +88,12 @@ public class ListFavoriteAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
     public interface OnCallBackFormListFavoriteAdapter{
         void openBook(String position,String linkBook);
+        void deleteBookFormFavorite(String id,String category, int pos);
+    }
+    private class EmptyViewholder extends RecyclerView.ViewHolder{
+        public EmptyViewholder(View itemView) {
+            super(itemView);
+        }
     }
 }
+

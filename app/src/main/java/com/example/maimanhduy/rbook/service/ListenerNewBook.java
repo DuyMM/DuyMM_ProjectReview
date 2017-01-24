@@ -36,7 +36,7 @@ public class ListenerNewBook extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         databaseReference = database.getReference();
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.child("vi").child("Notification").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (check){
@@ -46,9 +46,8 @@ public class ListenerNewBook extends Service {
                     mBuilder.setAutoCancel(true);
                     mBuilder.setSmallIcon(R.drawable.ic_info);
                     mBuilder.setTicker("This is a ticker");
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
-
+                    Intent intent = null;
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
                     // PendingIntent.getActivity(..) sẽ start mới một Activity và trả về
                     // đối tượng PendingIntent.
                     // Nó cũng tương đương với gọi Context.startActivity(Intent).
@@ -59,11 +58,14 @@ public class ListenerNewBook extends Service {
                     //mBuilder.setWhen(System.currentTimeMillis()+ 10* 1000);
                     mBuilder.setContentIntent(pendingIntent);
                     mBuilder.setContentTitle(getString(R.string.notification_title));
-                    mBuilder.setContentText(getString(R.string.notification_content_text));
+                    mBuilder.setContentText(dataSnapshot.getValue()+"");
                     NotificationManager notificationService  =
                             (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
                     Notification notification =  mBuilder.build();
-                    notificationService.notify(1, notification);
+                    if (dataSnapshot.getValue()!=null){
+                        notificationService.notify(1, notification);
+                    }
+
                 }
             }
 

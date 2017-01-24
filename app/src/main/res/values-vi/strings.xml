@@ -1,25 +1,27 @@
 <resources>
-    <string name="app_name">rBOOK</string>
+    <string name="app_name">rBOOK - Truyện ngắn online</string>
+    <string name="rbook">rBOOK</string>
     <string name="new_item_txt">MỚI</string>
-    <string name="title_light_novel_list">TIỂU THUYẾT</string>
-    <string name="sub_title_light_novel_list">Tiểu thuyết nhật bản</string>
-    <string name="title_comic_list">COMIC</string>
-    <string name="sub_title_comic_list">Comics....</string>
+    <string name="title_light_novel_list">TRUYỆN NGẮN</string>
+    <string name="sub_title_light_novel_list">Truyện ngắn cho trái tim và tâm hồn.</string>
+    <string name="title_comic_list">TRUYỆN TRẺ EM</string>
+    <string name="sub_title_comic_list">Những mầu truyện ngắn cho trẻ em.</string>
     <string name="hot_item_title_defaul">Harypoter va hon da phu thuy</string>
     <string name="title_hot_list">TOP 5</string>
     <string name="title_item_light_novel_defaul">Slowd art online 2</string>
     <string name="author_item_light_novel_default">AnChung Agahi</string>
     <string name="title_new_list">MỚI</string>
     <string name="title_other_list">THỂ LOẠI KHÁC</string>
-    <string name="sub_title_other_list">Các thể loại khác</string>
+    <string name="sub_title_other_list">Các thể loại khác, truyện cười, truyện châm biếm.</string>
     <string name="nav_header_text_default">rBook</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="favorie_menuleft_btn_title">Light Novel</string>
-    <string name="favorie_menuleft_btn_title_lightnovel">Light Novel</string>
-    <string name="favorie_menuleft_btn_title_comic">Comic</string>
-    <string name="default_content">Empty</string>
+    <string name="favorie_menuleft_btn_title">Truyện ngắn</string>
+    <string name="favorie_menuleft_btn_title_lightnovel">Truyện ngắn</string>
+    <string name="favorie_menuleft_btn_title_comic">Trẻ em</string>
+    <string name="favorie_menuleft_btn_title_other">Khác</string>
+    <string name="default_content">Rỗng</string>
     <string name="info_book_btn_read_title">Đọc</string>
     <string name="tv_or_title">Hoặc</string>
     <string name="info_book_btn_download_title">Tải xuống</string>
@@ -70,4 +72,16 @@
     <string name="light_mode">Chế độ</string>
     <string name="tv_night_mode">Đêm</string>
     <string name="random_item">Ngẫu Nhiên</string>
+    <string name="empty">Rỗng</string>
+    <string name="description_introdcuce_app">Truyện ngắn trên di động</string>
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="network_dialog_title">Thiết bị không có kết nối mạng.</string>
+    <string name="network_dialog_content">
+Bạn có muốn tiếp tục mở ứng dụng.
+Chúng tôi sẽ mở những truyện đã được tải xuống.</string>
+    <string name="about_title">Về chúng tôi</string>
+    <string name="about_content">Xin chào. Tôi là "D". Tôi là một lập trình viên Android. Tôi thích đọc sách. Vì vậy tôi viết ứng dụng này cho mình và những người yêu đọc sách.
+    Tôi sẽ cập nhật 20 mẫu truyện mỗi ngày. Hy vọng bạn sẽ thích nó. Cảm ơn rất nhiều.</string>
+    <string name="banner_ads">ca-app-pub-6735901313419368/7025165131</string>
+    <string name="interstitial_full_screen">ca-app-pub-6735901313419368/8501898331</string>
 </resources>

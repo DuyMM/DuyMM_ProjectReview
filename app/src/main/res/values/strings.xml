@@ -1,19 +1,20 @@
 <resources>
-    <string name="app_name">rBOOK</string>
+    <string name="app_name">rBOOK - Short stories online</string>
+    <string name="rbook">rBOOK</string>
     <string name="new_item_txt">NEW</string>
-    <string name="title_light_novel_list">LIGHT NOVEL</string>
-    <string name="sub_title_light_novel_list">Japanese fiction</string>
-    <string name="title_comic_list">COMIC</string>
-    <string name="sub_title_comic_list">Comics....</string>
+    <string name="title_light_novel_list">SHORT STORIES</string>
+    <string name="sub_title_light_novel_list">Short stories or for heart and soul.</string>
+    <string name="title_comic_list">STORIES FOR KIDS</string>
+    <string name="sub_title_comic_list">Short stories for kid.</string>
     <string name="hot_item_title_defaul">Harypoter va hon da phu thuy</string>
     <string name="title_hot_list">BEST 5</string>
     <string name="title_item_light_novel_defaul">Slowd art online 2</string>
     <string name="author_item_light_novel_default">AnChung Agahi</string>
     <string name="title_new_list">TOP NEW</string>
-    <string name="title_other_list">OTHER GENRES</string>
+    <string name="title_other_list">OTHER</string>
     <string name="sub_title_other_list">Other type</string>
     <string name="nav_header_text_default">rBook</string>
-
+    <string name="favorie_menuleft_btn_title_other">Other</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="favorie_menuleft_btn_title">Light Novel</string>
@@ -30,7 +31,7 @@
     <string name="tv_book_on_sdcard_title_content_default">Swold art online 3</string>
     <string name="tv_font_style_title">Font Style</string>
     <string name="tv_font_style_a">A</string>
-    <string name="tvTitleSettingActiviry"><![CDATA[Laguage & Other]]></string>
+    <string name="tvTitleSettingActiviry"><![CDATA[Language & Other]]></string>
     <string name="id">Id</string>
     <string name="category">Category</string>
     <string name="author">Author</string>
@@ -70,4 +71,16 @@
     <string name="light_mode">Light Mode</string>
     <string name="tv_night_mode">Night</string>
     <string name="random_item">Random</string>
+    <string name="empty">Empty</string>
+    <string name="description_introdcuce_app">Mobile short stories</string>
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="banner_ads">ca-app-pub-6735901313419368/7025165131</string>
+    <string name="interstitial_full_screen">ca-app-pub-6735901313419368/8501898331</string>
+    <string name="network_dialog_title">Your device is not connected to the network.</string>
+    <string name="network_dialog_content">
+You want to continue to open the application.
+We will open stories have been downloaded.</string>
+    <string name="about_title">About app</string>
+    <string name="about_content">Hello. I am "D". I am Android developer. I love read book.So i create this app for me and all people like read book.
+    I will update 20 stories per day. Hope you like that. Thank you very much.</string>
 </resources>

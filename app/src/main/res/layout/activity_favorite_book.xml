@@ -38,7 +38,7 @@
                android:textColor="@color/colorGrey"
                android:layout_marginTop="@dimen/favorite_menu_left_btn_margin_top"
                android:layout_centerHorizontal="true"
-               android:text="@string/other"
+               android:text="@string/favorie_menuleft_btn_title_other"
                android:layout_below="@id/btnFavoriteComic"
                android:id="@+id/btnFavoriteOther"
                android:background="@drawable/cricle_button_sepia"

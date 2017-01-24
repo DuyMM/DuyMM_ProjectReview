@@ -9,7 +9,7 @@
 <TextView
     android:id="@+id/splashTitle"
     android:textSize="50sp"
-    android:text="@string/app_name"
+    android:text="@string/rbook"
     android:textColor="@color/colorWhite"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
@@ -19,7 +19,7 @@
     android:textStyle="normal|bold"
     android:textAlignment="center" />
     <TextView
-        android:text="Truyện ngắn trên di động."
+        android:text="@string/description_introdcuce_app"
         android:layout_centerHorizontal="true"
         android:fontFamily="monospace"
         android:textStyle="normal|bold"
