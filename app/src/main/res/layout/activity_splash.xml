@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMain"
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.SplashActivity">
+<TextView
+    android:id="@+id/splashTitle"
+    android:textSize="50sp"
+    android:text="@string/rbook"
+    android:textColor="@color/colorWhite"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="monospace"
+    android:textStyle="normal|bold"
+    android:textAlignment="center" />
+    <TextView
+        android:text="@string/description_introdcuce_app"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="monospace"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/splashTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

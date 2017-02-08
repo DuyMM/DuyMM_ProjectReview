@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_all_book"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.AllBookActivity">
+    <RelativeLayout
+        android:id="@+id/realtiveViewAllBook"
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_heiht"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imgBackFormAllBook"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:tint="@color/colorMain"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arrow_back_fragment"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tvTitleAllBookActivity"
+            android:layout_toRightOf="@id/imgBackFormAllBook"
+            android:layout_toEndOf="@+id/imgBackFormAllBook"
+            android:textColor="@color/colorMain"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/realtiveViewAllBook"
+    android:id="@+id/recycerViewAllBook"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+</RelativeLayout>

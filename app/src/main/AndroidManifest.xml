@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.maimanhduy.rbook">
+    package="com.rootrbook.maimanhduy.rbook">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -8,17 +14,26 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".activities.InfoBookActivity" />
+        <activity android:name=".activities.ReadBookActivity" />
+        <activity android:name=".activities.BookInSdCardActivity" />
+        <activity android:name=".activities.FavoriteBookActivity" />
+        <activity android:name=".activities.SettingActivity" />
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.InfoBookActivity" />
-        <activity android:name=".activities.ReadBookActivity" />
-        <activity android:name=".activities.BookInSdCardActivity" />
-        <activity android:name=".activities.FavoriteBookActivity"></activity>
+
+        <service
+            android:name=".service.ListenerNewBook"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".activities.AllBookActivity"></activity>
     </application>
 
 </manifest>

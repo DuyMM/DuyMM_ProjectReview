@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/imgMoreBookOther"
             android:contentDescription="@null"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"

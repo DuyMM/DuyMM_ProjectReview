@@ -3,42 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#80000000"
+    android:background="@color/translaterBlack"
     android:clickable="true"
-    android:padding="20dp"
-    tools:context="com.example.maimanhduy.rbook.fragments.SettingFragment">
+    android:padding="@dimen/fragment_setting_pading"
+    tools:context="com.rootrbook.maimanhduy.rbook.fragments.SettingFragment">
     <ImageView
+        android:contentDescription="@null"
         android:id="@+id/imgCloseFragmentSetting"
         android:src="@drawable/ic_close_setting"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="40dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_marginTop="@dimen/img_close_fragment_seting_margin_top"
+        android:layout_width="@dimen/img_close_fragment_setting_width"
+        android:layout_height="@dimen/img_close_fragment_setting_height" />
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/imgFavoriteFragmentSetting"
+        android:src="@drawable/ic_favorite_border"
+        android:layout_marginTop="@dimen/img_close_fragment_seting_margin_top"
+        android:layout_width="@dimen/img_close_fragment_setting_width"
+        android:layout_height="@dimen/img_close_fragment_setting_height" />
     <RelativeLayout
         android:layout_below="@+id/imgCloseFragmentSetting"
         android:id="@+id/relativeSetting"
-        android:padding="10dp"
-        android:layout_width="250dp"
+        android:padding="@dimen/realtive_setting_padding"
+        android:layout_width="@dimen/realtive_setting_width"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:background="@color/colorDarkWhite">
         <Spinner
             android:gravity="center"
             android:id="@+id/spinnerSetting"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/realtive_setting_width"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_below="@id/spinnerSetting"
             android:id="@+id/tvFontStyle"
-            android:text="Font Styke"
+            android:text="@string/tv_font_style_title"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="@dimen/tv_font_style_magin_bot"/>
         <LinearLayout
             android:id="@+id/linearSpinner"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/realtive_setting_width"
             android:layout_height="1dp"
             android:layout_below="@id/tvFontStyle"
             android:background="@color/colorMain"
@@ -46,26 +54,25 @@
 
         <RelativeLayout
             android:id="@+id/relativeTextSize"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/realtive_setting_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/linearSpinner">
 
             <TextView
                 android:id="@+id/tvSettingFontSizeMinus"
-                android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginLeft="@dimen/tv_setting_content_margin"
+                android:layout_marginStart="@dimen/tv_setting_content_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="A"
-                android:textSize="25sp" />
+                android:text="@string/tv_font_style_a"
+                android:textSize="@dimen/tvfont_style_a_small" />
 
             <TextView
                 android:id="@+id/tvTextSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="54"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
 
@@ -74,23 +81,24 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTextSize"
                 android:layout_centerHorizontal="true"
-                android:text="Font size" />
+                android:text="@string/tv_font_size" />
 
             <TextView
                 android:id="@+id/tvSettingFontSizePlus"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginEnd="@dimen/tv_setting_content_margin"
+                android:layout_marginRight="@dimen/tv_setting_content_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="A"
-                android:textSize="40sp" />
+                android:text="@string/tv_font_style_a"
+                android:textSize="@dimen/tvfont_style_a_big" />
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/linearTextSize"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/realtive_setting_width"
             android:layout_height="1dp"
             android:layout_below="@id/relativeTextSize"
             android:background="@color/colorMain"
@@ -98,18 +106,18 @@
 
         <RelativeLayout
             android:id="@+id/relativeMarginSize"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/realtive_setting_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/linearTextSize">
 
             <TextView
                 android:id="@+id/tvMarginMinus"
-                android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginLeft="@dimen/tv_setting_content_margin"
+                android:layout_marginStart="@dimen/tv_setting_content_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="-"
+                android:text="@string/minus"
                 android:textSize="50sp" />
 
             <TextView
@@ -117,7 +125,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="20"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
 
@@ -126,23 +133,24 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvMarginSize"
                 android:layout_centerHorizontal="true"
-                android:text="Margin" />
+                android:text="@string/tv_margin_text" />
 
             <TextView
                 android:id="@+id/tvMarginPlus"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginEnd="@dimen/tv_setting_content_margin"
+                android:layout_marginRight="@dimen/tv_setting_content_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="+"
+                android:text="@string/plus"
                 android:textSize="50sp" />
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/linearLightScreen"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/realtive_setting_width"
             android:layout_height="1dp"
             android:layout_below="@id/relativeMarginSize"
             android:background="@color/colorMain"
@@ -151,10 +159,11 @@
         <RelativeLayout
             android:layout_marginTop="10dp"
             android:id="@+id/relativeScreenLight"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/realtive_setting_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/linearLightScreen">
         <ImageButton
+            android:contentDescription="@null"
             android:id="@+id/btnNormalMode"
             android:src="@drawable/ic_done"
             android:background="@drawable/cricle_button_nomal"
@@ -165,11 +174,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="Light Mode" />
+                android:text="@string/light_mode" />
             <Button
                 android:id="@+id/btnNightMode"
                 android:textColor="@color/colorDarkWhite"
-                android:text="night"
+                android:text="@string/tv_night_mode"
                 android:background="@drawable/cricle_button_night"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"

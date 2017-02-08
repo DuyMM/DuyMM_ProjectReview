@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white"
+    android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imgAllBook"
+        android:contentDescription="@null"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/tvTitleAllBookItem"
+        android:textSize="@dimen/tv_title_favorite_recyler_view_text_size"
+        android:fontFamily="monospace"
+        android:text="@string/author_item_light_novel_default"
+        android:textColor="@color/colorBlack"
+        android:layout_toRightOf="@id/imgAllBook"
+        android:layout_toEndOf="@id/imgAllBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+      android:id="@+id/tvAuthorAllBookItem"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/about_menu"
+        android:layout_below="@id/tvTitleAllBookItem"
+        android:layout_toRightOf="@id/imgAllBook"
+        android:layout_toEndOf="@id/imgAllBook"
+        android:fontFamily="monospace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
+</android.support.v7.widget.CardView>

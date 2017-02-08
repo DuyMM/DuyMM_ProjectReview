@@ -4,34 +4,31 @@
     android:id="@+id/activity_read_book"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.maimanhduy.rbook.activities.ReadBookActivity">
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.ReadBookActivity">
 
     <ScrollView
         android:id="@+id/scrollViewReadBook"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/toolbar_heiht"
         android:background="@color/colorDarkWhite">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <TextView
                 android:id="@+id/tvReadBook"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:lineSpacingExtra="0dp"
-                android:textSize="15dp" />
+                android:layout_marginLeft="@dimen/tv_readbook_margin_right"
+                android:layout_marginRight="@dimen/tv_readbook_margin_right"
+                android:textSize="@dimen/tv_readbook_text_size_default" />
         </RelativeLayout>
     </ScrollView>
 
     <fragment
         android:id="@+id/fragmentSetting"
-        android:name="com.example.maimanhduy.rbook.fragments.SettingFragment"
+        android:name="com.rootrbook.maimanhduy.rbook.fragments.SettingFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
@@ -40,7 +37,7 @@
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/toolbar_heiht"
         android:background="@color/colorWhite">
 
         <ProgressBar
@@ -60,11 +57,12 @@
             android:contentDescription="@null"
             android:src="@drawable/ic_settings_fragment" />
       <TextView
-          android:textSize="18sp"
-          android:text="Sowld Art Online 3"
+          android:id="@+id/tvTitleBookOfReadBook"
+          android:textSize="@dimen/tv_readbook_title_of_book"
+          android:text="@null"
           android:textAlignment="center"
-          android:layout_marginRight="50dp"
-          android:layout_marginEnd="50dp"
+          android:layout_marginRight="@dimen/tv_title_book_of_readbook_margin_right"
+          android:layout_marginEnd="@dimen/tv_title_book_of_readbook_margin_right"
           android:layout_alignParentBottom="true"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

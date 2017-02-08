@@ -9,29 +9,32 @@
         <ImageView
             android:id="@+id/imgFavoriteRecylerView"
             android:contentDescription="@null"
-            android:src="@drawable/favorite1"
             android:scaleType="centerCrop"
-            android:layout_width="70dp"
-            android:layout_height="70dp" />
+            android:layout_width="@dimen/img_favorite_title_recylerview_width"
+            android:layout_height="@dimen/img_favorite_title_recylerview_width" />
         <TextView
             android:id="@+id/tvTitleFavoriteRecylerView"
-            android:textSize="16sp"
+            android:textSize="@dimen/tv_title_favorite_recyler_view_text_size"
             android:fontFamily="monospace"
             android:textColor="@color/colorBlack"
-            android:text="Bach Khoa Su Ky Toan Thu"
+            android:text="@string/tv_title_favorite_recyler_view_content_default"
+            android:layout_toEndOf="@id/imgFavoriteRecylerView"
             android:layout_toRightOf="@id/imgFavoriteRecylerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tvAuthorFavoriteRecylerview"
             android:layout_toRightOf="@id/imgFavoriteRecylerView"
+            android:layout_toEndOf="@id/imgFavoriteRecylerView"
             android:layout_alignParentBottom="true"
-            android:text="Mirai Saoki"
+            android:text="@string/author_item_light_novel_default"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:text="22/11/2012"
+            android:text="@string/date_of_add_favorite"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

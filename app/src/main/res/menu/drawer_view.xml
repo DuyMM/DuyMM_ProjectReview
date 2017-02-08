@@ -3,31 +3,28 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_first_fragment"
+            android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_second_fragment"
+            android:id="@+id/nav_favorite"
             android:icon="@drawable/ic_favorite"
-            android:title="Favorite Book" />
+            android:title="@string/favorite_menu" />
         <item
-            android:id="@+id/nav_third_fragment"
+            android:id="@+id/nav_book_in_sd_card"
             android:icon="@drawable/ic_sd_storage"
-            android:title="Book in sd card" />
-        <item android:id="@+id/bav_fourth_fragment"
+            android:title="@string/book_on_phone" />
+        <item android:id="@+id/nav_setting"
             android:icon="@drawable/ic_settings"
-            android:title="Setting"/>
+            android:title="@string/setting_menu"/>
     </group>
-    <item android:title="Other">
+    <item android:title="@string/other">
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/action_favorite"
+                    android:id="@+id/nav_about_me"
                     android:icon="@drawable/ic_info"
-                    android:title="About" />
-                <item
-                    android:icon="@drawable/ic_info"
-                    android:title="Rate my app" />
+                    android:title="@string/about_menu" />
             </group>
         </menu>
     </item>

@@ -6,16 +6,15 @@
     android:layout_height="match_parent">
 
 <ImageView
-    android:src="@drawable/image1"
     android:contentDescription="@null"
     android:id="@+id/imgSlideItem"
     android:scaleType="centerCrop"
     android:adjustViewBounds="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
-    <com.example.maimanhduy.rbook.ui.ItemNew
-        custom:titleText="New"
-        custom:valueColor="@color/colorLightBlue"
+    <com.rootrbook.maimanhduy.rbook.ui.ItemNew
+        custom:titleText="@string/random_item"
+        custom:valueColor="@color/colorRed"
         custom:textSize="15"
         android:layout_margin="@dimen/item_new_margin"
         android:layout_width="wrap_content"
@@ -33,7 +32,7 @@
            android:layout_marginStart="@dimen/title_slide_show_margin_left"
            android:layout_alignParentBottom="true"
            android:textColor="@color/colorWhite"
-           android:text="@string/title_item_light_novel_defaul"
+           android:text="@string/empty"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:textSize="@dimen/title_slide_show"
@@ -43,9 +42,10 @@
            android:fontFamily="monospace"
            android:layout_alignParentBottom="true"
            android:layout_marginLeft="@dimen/title_slide_show_margin_left"
+           android:layout_marginStart="@dimen/title_slide_show_margin_left"
            android:layout_marginBottom="@dimen/author_slide_show_margin_bot"
            android:background="@color/colorGrey"
-           android:text="@string/author_item_light_novel_default"
+           android:text="@string/empty"
            android:textColor="@color/colorWhite"
            android:id="@+id/tvSlideAuthor"
            android:layout_width="wrap_content"

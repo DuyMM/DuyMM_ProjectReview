@@ -176,43 +176,52 @@ public class IndicatorView extends View implements IndicatorInterface, ViewPager
 
     @Override
     public void onPageSelected(int position) {
-        beforePosition = currentPosition;
-        currentPosition = position;
+       if (position<3){
+           beforePosition = currentPosition;
+           currentPosition = position;
 
-        if (beforePosition == currentPosition) {
-            beforePosition = currentPosition + 1;
-        }
+           if (beforePosition == currentPosition) {
+               beforePosition = currentPosition + 1;
+           }
+if (beforePosition>=3){
+    //Loi slide she bi show o day
+}else {
+    dots[currentPosition].setColor(colorSelected);
+    dots[beforePosition].setColor(colorUnselected);
+}
+           AnimatorSet animatorSet = new AnimatorSet();
+           animatorSet.setDuration(animateDuration);
 
-        dots[currentPosition].setColor(colorSelected);
-        dots[beforePosition].setColor(colorUnselected);
+           animatorZoomIn = ValueAnimator.ofInt(radiusUnselected, radiusSelected);
+           animatorZoomIn.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+               int positionPerform = currentPosition;
 
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setDuration(animateDuration);
+               @Override
+               public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                   int newRadius = (int) valueAnimator.getAnimatedValue();
+                   changeNewRadius(positionPerform, newRadius);
+               }
+           });
 
-        animatorZoomIn = ValueAnimator.ofInt(radiusUnselected, radiusSelected);
-        animatorZoomIn.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            int positionPerform = currentPosition;
+           animatorZoomOut = ValueAnimator.ofInt(radiusSelected, radiusUnselected);
+           animatorZoomOut.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+               int positionPerform = beforePosition;
 
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                int newRadius = (int) valueAnimator.getAnimatedValue();
-                changeNewRadius(positionPerform, newRadius);
-            }
-        });
+               @Override
+               public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                   int newRadius = (int) valueAnimator.getAnimatedValue();
+                   if(positionPerform>=3){
+                       //Loi slide she bi show o day
+                   }else {
+                       changeNewRadius(positionPerform, newRadius);
+                   }
 
-        animatorZoomOut = ValueAnimator.ofInt(radiusSelected, radiusUnselected);
-        animatorZoomOut.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            int positionPerform = beforePosition;
+               }
+           });
 
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                int newRadius = (int) valueAnimator.getAnimatedValue();
-                changeNewRadius(positionPerform, newRadius);
-            }
-        });
-
-        animatorSet.play(animatorZoomIn).with(animatorZoomOut);
-        animatorSet.start();
+           animatorSet.play(animatorZoomIn).with(animatorZoomOut);
+           animatorSet.start();
+       }
 
     }
 
