@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorMain"
-    tools:context="com.example.maimanhduy.rbook.activities.SplashActivity">
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.SplashActivity">
 <TextView
     android:id="@+id/splashTitle"
     android:textSize="50sp"

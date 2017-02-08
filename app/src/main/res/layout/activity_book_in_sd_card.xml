@@ -4,7 +4,7 @@
     android:id="@+id/activity_book_in_sd_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.maimanhduy.rbook.activities.BookInSdCardActivity">
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.BookInSdCardActivity">
  <android.support.v7.widget.RecyclerView
      android:id="@+id/recycerViewSDCard"
   android:layout_marginTop="@dimen/toolbar_heiht"

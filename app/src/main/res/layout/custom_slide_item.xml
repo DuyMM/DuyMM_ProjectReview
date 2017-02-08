@@ -12,7 +12,7 @@
     android:adjustViewBounds="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
-    <com.example.maimanhduy.rbook.ui.ItemNew
+    <com.rootrbook.maimanhduy.rbook.ui.ItemNew
         custom:titleText="@string/random_item"
         custom:valueColor="@color/colorRed"
         custom:textSize="15"

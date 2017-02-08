@@ -5,7 +5,7 @@
     android:id="@+id/activity_favorite_book"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.maimanhduy.rbook.activities.FavoriteBookActivity">
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.FavoriteBookActivity">
    <RelativeLayout
        android:layout_marginTop="@dimen/toolbar_heiht"
        android:layout_width="match_parent"

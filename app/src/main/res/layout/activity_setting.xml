@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorDarkWhite"
-    tools:context="com.example.maimanhduy.rbook.activities.SettingActivity">
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.SettingActivity">
     <RelativeLayout
         android:background="@color/colorWhite"
         android:id="@+id/relativeToolbarSetting"

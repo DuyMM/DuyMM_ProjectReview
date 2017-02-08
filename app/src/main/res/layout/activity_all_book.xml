@@ -4,7 +4,7 @@
     android:id="@+id/activity_all_book"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.maimanhduy.rbook.activities.AllBookActivity">
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.AllBookActivity">
     <RelativeLayout
         android:id="@+id/realtiveViewAllBook"
         android:background="@color/colorWhite"

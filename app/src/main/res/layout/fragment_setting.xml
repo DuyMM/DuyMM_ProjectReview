@@ -6,7 +6,7 @@
     android:background="@color/translaterBlack"
     android:clickable="true"
     android:padding="@dimen/fragment_setting_pading"
-    tools:context="com.example.maimanhduy.rbook.fragments.SettingFragment">
+    tools:context="com.rootrbook.maimanhduy.rbook.fragments.SettingFragment">
     <ImageView
         android:contentDescription="@null"
         android:id="@+id/imgCloseFragmentSetting"

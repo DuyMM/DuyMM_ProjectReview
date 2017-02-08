@@ -4,7 +4,7 @@
     android:id="@+id/activity_read_book"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.maimanhduy.rbook.activities.ReadBookActivity">
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.ReadBookActivity">
 
     <ScrollView
         android:id="@+id/scrollViewReadBook"
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/fragmentSetting"
-        android:name="com.example.maimanhduy.rbook.fragments.SettingFragment"
+        android:name="com.rootrbook.maimanhduy.rbook.fragments.SettingFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"

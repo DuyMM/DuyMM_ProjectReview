@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorDarkWhite"
     android:layout_height="match_parent"
-    tools:context="com.example.maimanhduy.rbook.MainActivity">
+    tools:context="com.rootrbook.maimanhduy.rbook.MainActivity">
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="@dimen/toolbar_heiht"
         android:id="@+id/recycerViewMain"

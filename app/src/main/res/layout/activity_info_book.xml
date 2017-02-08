@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context="com.example.maimanhduy.rbook.activities.InfoBookActivity">
+    tools:context="com.rootrbook.maimanhduy.rbook.activities.InfoBookActivity">
     <RelativeLayout
             android:layout_marginLeft="@dimen/general_cardview_margin_left"
             android:layout_marginStart="@dimen/general_cardview_margin_left"
